@@ -12,12 +12,15 @@ namespace MohawkGame2D
     {
         Vector2 position;
         Vector2 size;
-        Vector2 velocity = new Vector2(0, 0);
-        float gravity = 0.6f;
-        bool isGrounded = false;
-        float friction = 0.7f;
-        public bool fail = false;
 
+        Vector2 velocity = new Vector2(0, 0);
+        float gravity = 0.6f; // how fast you fall
+
+        bool isGrounded = false;
+
+        public bool isDead = false;
+
+        // lets you change the size outside of this area and makes the pos and size in here the same as it
         public Player(Vector2 position, Vector2 size)
         {
             this.position = position;
@@ -33,7 +36,7 @@ namespace MohawkGame2D
         public void Generate()
         {
             Draw.LineSize = 3;
-            Draw.LineColor = Color.Green;
+            Draw.LineColor = Color.Yellow;
             Draw.FillColor = Color.Clear;
             Draw.Rectangle(position, size);
         }
@@ -74,8 +77,15 @@ namespace MohawkGame2D
             {
                 velocity.X = 0;
             }
+
+            // makes you stand still if you hold any combo of both left and right directions
+            if (Input.IsKeyboardKeyDown(KeyboardInput.A) && Input.IsKeyboardKeyDown(KeyboardInput.D) || Input.IsKeyboardKeyDown(KeyboardInput.Left) && Input.IsKeyboardKeyDown(KeyboardInput.Right) || Input.IsKeyboardKeyDown(KeyboardInput.A) && Input.IsKeyboardKeyDown(KeyboardInput.Right) || Input.IsKeyboardKeyDown(KeyboardInput.Left) && Input.IsKeyboardKeyDown(KeyboardInput.D))
+            {
+                velocity.X = 0;
+            }
         }
 
+        // applies collision to every platform in the platformAll list
         public void Collision(List<Platform> platformAll)
         {
             isGrounded = false;
@@ -85,8 +95,6 @@ namespace MohawkGame2D
             float playerLeft = position.X;
             float playerRight = position.X + size.X;
 
-            
-
             foreach (Platform platformCollision in platformAll)
             {
                 float platformTop = platformCollision.position.Y;
@@ -94,10 +102,13 @@ namespace MohawkGame2D
                 float platformLeft = platformCollision.position.X;
                 float platformRight = platformCollision.position.X + platformCollision.size.X;
 
-                // top collision
+                // checks if the player is above the platform and if they will be in the platform next frame
+                // if true, it means that last frame you were over the platform but next frame you will be under / in it
                 bool isFalling = playerBottom <= platformTop && playerBottom + velocity.Y >= platformTop;
+                // checks if the player is within the horizontal space of the platform so that it doesnt span the entire game width
                 bool isOverlappingX = playerRight > platformLeft && playerLeft < platformRight;
 
+                // requires both of the previous things to be true AND for you to be moving down
                 if (isFalling && isOverlappingX && velocity.Y >= 0)
                 {
                     position.Y = platformTop - size.Y;
@@ -105,17 +116,6 @@ namespace MohawkGame2D
                     isGrounded = true;
                     break;
                 }
-
-                // bottom collision
-                /*bool isRising = playerTop >= platformBottom;// && playerTop + velocity.Y <= platformBottom;
-                bool isOverLappingX_Bottom = playerRight > platformLeft && playerLeft < platformRight;
-
-                if (isRising) // && isOverLappingX_Bottom && velocity.Y >= 0)
-                {
-                    position.Y = platformBottom;
-                    velocity.Y = 0;
-                    break;
-                }*/
             }
 
             // stops the player from going off the screen
@@ -127,7 +127,7 @@ namespace MohawkGame2D
             // ends the game if you fall to the bottom
             else if (playerBottom > Window.Height - 5)
             {
-                fail = true;
+                isDead = true;
             }
             else if (playerRight > Window.Width)
             {

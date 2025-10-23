@@ -8,27 +8,32 @@ using System.Threading.Tasks;
 
 namespace MohawkGame2D
 {
-    public class Ending
+    public class Death
     {
-        bool gameLose = false;
-        float gameLoseTimer = 0;
-        float gameLoseTimerDuration = 2;
+        bool gameOver = false;
+        float gameOverTimer = 0;
+        float gameOverDuration = 2; // length of game over screen
 
         public void Start()
         {
-            gameLoseTimer = 0;
-            gameLose = true;
+            gameOverTimer = 0;
+            gameOver = true;
         }
 
         public void Update()
         {
-            if (!gameLose) return;
+            // stops running the update code here unless gameOver is true
+            if (!gameOver)
+            {
+                return;
+            }
 
-            gameLoseTimer += Time.DeltaTime;
+            gameOverTimer += Time.DeltaTime;
 
             GameOverScreen();
 
-            if (gameLoseTimer >= gameLoseTimerDuration)
+            // if the timer gets to the max duration then the program closes
+            if (gameOverTimer >= gameOverDuration)
             {
                 Environment.Exit(0);
             }
@@ -46,9 +51,9 @@ namespace MohawkGame2D
             Text.Draw("TOTAL SYSTEM FAILURE DETECTED", new Vector2(30, 200));
         }
 
-        public bool GameLose()
+        public bool IsGameOver()
         {
-            return gameLose;
+            return gameOver;
         }
     }
 }

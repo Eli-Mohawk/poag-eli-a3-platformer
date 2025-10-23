@@ -2,13 +2,25 @@
 using System.Numerics;
 using System.Collections.Generic;
 
+// lines with comments after them (*code* //) are to show that those variables might change based on play testing
+
+/// TO-DO List
+/// add textures
+/// finish platforms
+/// add spikes
+/// add new obstacles
+/// add more levels
+/// add win screen
+/// add lives???
+/// add sound???
+
 namespace MohawkGame2D
 {
     public class Game
     {
-        Player player = new Player(new Vector2(295, 525), new Vector2(10, 20));
+        Player playerMain = new Player(new Vector2(295, 525), new Vector2(10, 20)); // starting location and player size
         List<Platform> platformAll = new List<Platform>();
-        Ending gameOver = new Ending();
+        Death gameOver = new Death();
 
         public void Setup()
         {
@@ -26,25 +38,27 @@ namespace MohawkGame2D
         {
             Window.ClearBackground(Color.Gray);
 
-            if (gameOver.GameLose())
+            // if the game is over then it does the game over screen and timer and stops running everything else (players, platforms, collision, etc.)
+            if (gameOver.IsGameOver())
             {
                 gameOver.Update();
                 return;
             }
 
-            player.Update();
+            playerMain.Update();
 
-
+            // creates and adds collision to each platform in the platformAll list
             foreach (Platform platform in platformAll)
             {
                 platform.Generate();
 
-                player.Collision(platformAll);
+                playerMain.Collision(platformAll);
             }
 
-            player.Generate();
+            playerMain.Generate();
 
-            if (player.fail)
+            // starts the Death code
+            if (playerMain.isDead)
             {
                 gameOver.Start();
             }
