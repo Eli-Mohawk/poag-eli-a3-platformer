@@ -20,7 +20,7 @@ namespace MohawkGame2D
 
         public void Generate()
         {
-            Draw.LineSize = 1;
+            Draw.LineSize = 3;
             Draw.LineColor = Color.Blue;
             Draw.FillColor = Color.Clear;
             Draw.Rectangle(position, size);

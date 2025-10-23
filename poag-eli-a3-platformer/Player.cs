@@ -32,8 +32,8 @@ namespace MohawkGame2D
 
         public void Generate()
         {
-            Draw.LineSize = 1;
-            Draw.LineColor = Color.Yellow;
+            Draw.LineSize = 3;
+            Draw.LineColor = Color.Green;
             Draw.FillColor = Color.Clear;
             Draw.Rectangle(position, size);
         }
@@ -49,7 +49,7 @@ namespace MohawkGame2D
 
         void InputMovement()
         {
-            if (Input.IsKeyboardKeyDown(KeyboardInput.Space) && isGrounded == true || Input.IsKeyboardKeyDown(KeyboardInput.W) && isGrounded == true || Input.IsKeyboardKeyDown(KeyboardInput.Up) && isGrounded == true)
+            if (Input.IsKeyboardKeyPressed(KeyboardInput.Space) && isGrounded == true || Input.IsKeyboardKeyPressed(KeyboardInput.W) && isGrounded == true || Input.IsKeyboardKeyPressed(KeyboardInput.Up) && isGrounded == true)
             {
                 velocity.Y = -10f;
                 isGrounded = false;
@@ -107,7 +107,7 @@ namespace MohawkGame2D
                 }
 
                 // bottom collision
-                bool isRising = playerTop >= platformBottom;// && playerTop + velocity.Y <= platformBottom;
+                /*bool isRising = playerTop >= platformBottom;// && playerTop + velocity.Y <= platformBottom;
                 bool isOverLappingX_Bottom = playerRight > platformLeft && playerLeft < platformRight;
 
                 if (isRising) // && isOverLappingX_Bottom && velocity.Y >= 0)
@@ -115,7 +115,7 @@ namespace MohawkGame2D
                     position.Y = platformBottom;
                     velocity.Y = 0;
                     break;
-                }
+                }*/
             }
 
             // stops the player from going off the screen
