@@ -26,4 +26,40 @@ namespace MohawkGame2D
             Draw.Rectangle(position, size);
         }
     }
+
+    public class Spike
+    {
+        Vector2 top;
+        Vector2 right;
+        Vector2 left;
+
+        public Spike(Vector2 top, Vector2 right, Vector2 left)
+        {
+            this.top = top;
+            this.right = right;
+            this.left = left;
+        }
+
+        public void Generate()
+        {
+            for (int spikeCount = 0; spikeCount < 100; spikeCount++)
+            {
+                int spikeGap = spikeCount * 8;
+
+                Draw.LineSize = 1;
+                Draw.LineColor = Color.Red;
+                Draw.FillColor = Color.Clear;
+                Draw.Triangle(new Vector2(top.X + spikeGap, top.Y), new Vector2(right.X + spikeGap, right.Y), new Vector2(left.X + spikeGap, left.Y));
+            }
+
+
+
+            
+
+
+
+
+
+        }
+    }
 }

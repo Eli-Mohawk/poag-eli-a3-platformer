@@ -19,6 +19,9 @@ namespace MohawkGame2D
         bool isGrounded = false;
 
         public bool isDead = false;
+        public bool isWin = false;
+
+        public int level = 1;
 
         // lets you change the size outside of this area and makes the pos and size in here the same as it
         public Player(Vector2 position, Vector2 size)
@@ -55,7 +58,6 @@ namespace MohawkGame2D
             if (Input.IsKeyboardKeyPressed(KeyboardInput.Space) && isGrounded == true || Input.IsKeyboardKeyPressed(KeyboardInput.W) && isGrounded == true || Input.IsKeyboardKeyPressed(KeyboardInput.Up) && isGrounded == true)
             {
                 velocity.Y = -10f;
-                isGrounded = false;
             }
 
             // for the time that the key is down, you will move in that direction by setting your horizontal velocity to positive or negative
@@ -83,10 +85,15 @@ namespace MohawkGame2D
             {
                 velocity.X = 0;
             }
+
+            if (Input.IsKeyboardKeyPressed(KeyboardInput.S))
+            {
+                velocity.Y = -10f;
+            }
         }
 
         // applies collision to every platform in the platformAll list
-        public void Collision(List<Platform> platformAll)
+        public void Collision(List<Platform> platformLevelAll)
         {
             isGrounded = false;
 
@@ -95,7 +102,7 @@ namespace MohawkGame2D
             float playerLeft = position.X;
             float playerRight = position.X + size.X;
 
-            foreach (Platform platformCollision in platformAll)
+            foreach (Platform platformCollision in platformLevelAll)
             {
                 float platformTop = platformCollision.position.Y;
                 float platformBottom = platformCollision.position.Y + platformCollision.size.Y;
@@ -118,14 +125,15 @@ namespace MohawkGame2D
                 }
             }
 
-            // stops the player from going off the screen
-            if (playerTop < 0)
+            if (playerBottom < 0)
             {
-                position.Y = 0;
-                velocity.Y = 0;
+                level += 1;
+                position = new Vector2(200, 300);
+                // if statement for win if at or over level thing FUCK YOU
             }
+
             // ends the game if you fall to the bottom
-            else if (playerBottom > Window.Height - 5)
+            if (playerBottom >= Window.Height - 10)
             {
                 isDead = true;
             }
