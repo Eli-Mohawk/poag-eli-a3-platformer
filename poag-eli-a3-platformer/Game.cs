@@ -13,6 +13,8 @@ using System.Collections.Generic;
 /// add win screen
 /// add lives???
 /// add sound???
+/// add mulitplayer???
+/// add timer so player has to go fast???
 
 namespace MohawkGame2D
 {
