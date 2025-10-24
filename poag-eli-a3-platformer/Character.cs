@@ -10,7 +10,7 @@ namespace MohawkGame2D
 {
     public class Player
     {
-        Vector2 position;
+        public Vector2 position;
         Vector2 size;
 
         Vector2 velocity = new Vector2(0, 0);
@@ -86,10 +86,34 @@ namespace MohawkGame2D
                 velocity.X = 0;
             }
 
+
+
+
+
+
+            // TEMP DEBUG INPUTS
+            // TEMP DEBUG INPUTS
+            // TEMP DEBUG INPUTS
+
+
             if (Input.IsKeyboardKeyPressed(KeyboardInput.S))
             {
                 velocity.Y = -10f;
             }
+            if (Input.IsKeyboardKeyPressed(KeyboardInput.L))
+            {
+                if (level > 1)
+                {
+                    level -= 1;
+                }
+            }
+
+
+
+
+
+
+
         }
 
         // applies collision to every platform in the platformAll list
@@ -128,8 +152,12 @@ namespace MohawkGame2D
             if (playerBottom < 0)
             {
                 level += 1;
-                position = new Vector2(200, 300);
-                // if statement for win if at or over level thing FUCK YOU
+                position = new Vector2(295, 525);
+
+                if (level >= 11)
+                {
+                    isWin = true;
+                }
             }
 
             // ends the game if you fall to the bottom
