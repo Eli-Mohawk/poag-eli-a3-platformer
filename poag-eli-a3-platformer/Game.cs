@@ -1,22 +1,32 @@
-﻿using System;
-using System.Numerics;
+﻿using Raylib_cs;
+using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
 
 // lines with comments after them (*code* //) are to show that those variables might change based on play testing
 
 /// TO-DO List
-/// add textures
-/// finish platforms
-/// add new obstacles
-/// add more levels
+/// 
+/// fix TitleScreen code
+/// finish level 2
+/// add spikes to level 2 and give them collision
+/// add all side collision
 /// add win screen
-/// add lives???
-/// add sound???
+/// add life system
+/// add more levels
+/// add new objects and give them collision
+/// add textures
+/// 
+/// 
 /// add mulitplayer???
-/// add timer so player has to go fast???
-/// coyote time
+/// add coyote time???
+/// 
+/// 
 /// remove debug keybinds (character.cs > S / L) (game.cs > L)
+/// 
+/// 
+
 
 namespace MohawkGame2D
 {
@@ -39,7 +49,7 @@ namespace MohawkGame2D
         public void Setup()
         {
             Window.SetSize(800, 600);
-            Window.SetTitle("");
+            Window.SetTitle("A game about ascending");
         }
 
         public void Update()
@@ -56,7 +66,6 @@ namespace MohawkGame2D
             {
                 isTitleShown = true;
             }
-
 
 
 
@@ -161,17 +170,17 @@ namespace MohawkGame2D
                 new Vector2(300, 25),
                 new Vector2(200, 50),
 
-                new Vector2(150, 100),
-                new Vector2(175, 35),
+                new Vector2(100, 100),
+                new Vector2(225, 35),
 
-                new Vector2(150, 145),
-                new Vector2(175, 250),
+                new Vector2(100, 145),
+                new Vector2(225, 250),
 
-                new Vector2(650 - 175, 100),
-                new Vector2(175, 35),
+                new Vector2(475, 100),
+                new Vector2(275, 35),
 
-                new Vector2(650 - 175, 145),
-                new Vector2(175, 250),
+                new Vector2(475, 145),
+                new Vector2(275, 250),
             };
 
             Draw.LineSize = 1;
@@ -183,29 +192,47 @@ namespace MohawkGame2D
             Draw.Rectangle(text[6], text[7]); // objective name
             Draw.Rectangle(text[8], text[9]); // objectives
 
+            int controls = 105;
+            int objectives = 480;
+
+            int[] tT = [controls, objectives];
+
+
 
             
 
 
-
-
-
-            /*
-            Text.Color = textColors[0];
-            Text.Size = 50;
-            Text.Draw("-Ascent-", new Vector2(300, 25));
-
-
             Text.Color = textColors[1];
+            Text.Size = 45;
+            Text.Draw("-Ascent-", new Vector2(307, 33));
+            Text.Color = textColors[0];
+            Text.Draw("-Ascent-", new Vector2(304, 30));
+
+
+            Text.Color = Color.White;
             Text.Size = 35;
-            Text.Draw("Controls", new Vector2(100, 100));
-            */
+            Text.Draw("Controls", new Vector2(tT[0], 104));
+            Text.Draw("Objective", new Vector2(tT[1], 102));
+
+            Text.Size = 16;
+            Text.Draw("- W/Up: Jump", new Vector2(tT[0], 155));
+            Text.Draw("- A/Left: Move Left", new Vector2(tT[0], 175));
+            Text.Draw("- D/Right: Move Right", new Vector2(tT[0], 195));
+
+            Text.Draw("- go up", new Vector2(tT[1], 153));
+
+
 
             // starts the game
             if (Input.IsKeyboardKeyPressed(KeyboardInput.Enter))
             {
                 isTitleShown = false;
             }
+        }
+
+        void Pause()
+        {
+            System.Threading.Thread.Sleep(1000000000);
         }
     }
 }
