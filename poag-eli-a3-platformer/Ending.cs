@@ -48,12 +48,37 @@ namespace MohawkGame2D
             Text.Size = 70;
             Text.Color = Color.Red;
             Text.Draw("ERROR!!!", new Vector2(250, 100));
-            Text.Draw("TOTAL SYSTEM FAILURE DETECTED", new Vector2(30, 200));
+            Text.Draw("FAILURE", new Vector2(30, 200));
         }
 
         public bool IsGameOver()
         {
             return gameOver;
+        }
+    }
+
+    public class Win
+    {
+        bool gameWon = false;
+
+        public void Start()
+        {
+
+        }
+
+        public void Update()
+        {
+
+        }
+
+        void WinScreen()
+        {
+
+        }
+
+        public bool IsGameWon()
+        {
+            return gameWon;
         }
     }
 }
