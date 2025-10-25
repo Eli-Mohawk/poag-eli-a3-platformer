@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace MohawkGame2D
 {
-    public class GameOver
+    public class GameWon
     {
-        // makes the game over screen display for a set amount of time
-        float gameOverTimer = 0;
-        float gameOverDuration = 2;
+        float gameWonTimer = 0;
+        float gameWonDuration = 2;
 
         public void Setup()
         {
@@ -20,16 +19,15 @@ namespace MohawkGame2D
 
         public void Update()
         {
-            DrawGameOverScreen();
+            DrawGameWinScreen();
 
-            // closes the game when the timer gets to the duration
-            gameOverTimer += Time.DeltaTime;
-            if (gameOverTimer >= gameOverDuration)
+            gameWonTimer += Time.DeltaTime;
+            if (gameWonTimer >= gameWonDuration)
             {
                 Environment.Exit(0);
             }
         }
-        void DrawGameOverScreen()
+        void DrawGameWinScreen()
         {
             Draw.LineSize = 0;
             Draw.FillColor = Color.Black;

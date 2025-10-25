@@ -23,6 +23,8 @@ namespace MohawkGame2D
         public bool isPlayerDead;
         public bool isPlayerAscended;
 
+        int lives = 3;
+
         public void Setup()
         {
 
@@ -33,12 +35,19 @@ namespace MohawkGame2D
             Physics(platforms);
             PlayerInputs();
             DrawPlayer();
+            LifeSystem();
 
             CHEATS();
         }
 
         void DrawPlayer()
         {
+            // player health
+            Text.Size = 17;
+            Text.Color = Color.White;
+            Text.Draw($"{lives}", new Vector2(position.X, position.Y - 20));
+
+            // player
             Draw.LineSize = 3;
             Draw.LineColor = Color.Yellow;
             Draw.FillColor = Color.Clear;
@@ -115,7 +124,8 @@ namespace MohawkGame2D
                 // lose the game
                 else
                 {
-                    isPlayerDead = true;
+                    lives -= 1;
+                    position = startPosition;
                 }
             }
 
@@ -174,6 +184,14 @@ namespace MohawkGame2D
             if (isPlayerMovingLeft && isPlayerMovingRight)
             {
                 velocity.X = 0;
+            }
+        }
+
+        void LifeSystem()
+        {
+            if (lives <= 0)
+            {
+                isPlayerDead = true;
             }
         }
 

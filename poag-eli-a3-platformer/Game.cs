@@ -2,8 +2,7 @@
 ///
 /// finish level 2
 /// add spikes to level 2 and give them collision
-/// add win screen
-/// add life system !!!
+/// add win screen !!!
 /// add more levels
 /// add new objects and give them collision
 /// add textures
