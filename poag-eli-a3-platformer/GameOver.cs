@@ -29,6 +29,7 @@ namespace MohawkGame2D
                 Environment.Exit(0);
             }
         }
+
         void DrawGameOverScreen()
         {
             Draw.LineSize = 0;

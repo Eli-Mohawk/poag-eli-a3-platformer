@@ -46,10 +46,27 @@ namespace MohawkGame2D
             Text.Size = 17;
             Text.Color = Color.White;
             Text.Draw($"{lives}", new Vector2(position.X, position.Y - 20));
-
+            // player color changes based on health
+            Color[] healthColor = new Color[]
+            {
+                 new Color(255, 255, 0),
+                 new Color(245, 137, 0),
+                 new Color(255, 0, 0),
+            };
+            if (lives >= 3)
+            {
+                Draw.LineColor = healthColor[0];
+            }
+            else if (lives == 2)
+            {
+                Draw.LineColor = healthColor[1];
+            }
+            else if (lives == 1)
+            {
+                Draw.LineColor= healthColor[2];
+            }
             // player
             Draw.LineSize = 3;
-            Draw.LineColor = Color.Yellow;
             Draw.FillColor = Color.Clear;
             Draw.Rectangle(position, size);
         }
@@ -137,7 +154,7 @@ namespace MohawkGame2D
             }
 
             // win the game
-            if (gameLevel >= 10)
+            if (gameLevel > 10)
             {
                 isPlayerAscended = true;
             }
@@ -207,6 +224,10 @@ namespace MohawkGame2D
                 {
                     gameLevel -= 1;
                 }
+            }
+            if (Input.IsKeyboardKeyPressed(KeyboardInput.Y))
+            {
+                lives += 1;
             }
         }
     }

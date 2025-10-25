@@ -24,19 +24,20 @@ namespace MohawkGame2D
             gameWonTimer += Time.DeltaTime;
             if (gameWonTimer >= gameWonDuration)
             {
-                Environment.Exit(0);
+                Text.Draw("TEST", new Vector2(350, 300));
             }
         }
+
         void DrawGameWinScreen()
         {
             Draw.LineSize = 0;
             Draw.FillColor = Color.Black;
             Draw.Rectangle(new Vector2(0, 0), new Vector2(Window.Width, Window.Height));
 
-            Text.Size = 70;
-            Text.Color = Color.Red;
-            Text.Draw("ERROR!!!", new Vector2(250, 100));
-            Text.Draw("FAILURE", new Vector2(130, 200));
+            Text.Size = 50;
+            Text.Color = Color.Yellow;
+            Text.Draw("CONGRATULATIONS!", new Vector2(250, 100));
+            Text.Draw("YOU WON!", new Vector2(130, 200));
         }
     }
 }

@@ -1,21 +1,30 @@
 ﻿/// TO-DO List
-///
-/// finish level 2
-/// add spikes to level 2 and give them collision
-/// add win screen !!!
-/// add more levels
-/// add new objects and give them collision
-/// add textures
-/// add level select
+/// 
+/// title screen:
+/// change objective to info (e.g. fall = return to prev. level)
+/// 
+/// game over screen:
+/// finish visuals
+/// 
+/// game won screen:
+/// finish visuals
 /// add restart
+/// add level select?
 /// 
+/// levels:
+/// add platforms to level 2-10
+/// playtest every level / whole game
+/// level title with delta time
+/// remove leveltest
 /// 
-/// add mulitplayer???
-/// 
-/// 
+/// general:
+/// add new objects (e.g. new spike types / falling platforms)
+/// add VERY hard parkour for heart items that give 1 life
+/// add an invisible platform that takes you out of the map for a special ending
+/// add multiplayer
+/// add textures
 /// remove debug keybinds (character.cs > S / L) (game.cs > L)
-/// 
-/// 
+
 using Raylib_cs;
 using System;
 using System.Collections.Generic;
@@ -37,6 +46,7 @@ namespace MohawkGame2D
         List<Spike> spikeFloor = new List<Spike>();
 
         GameOver gameOver = new GameOver();
+        GameWon gameWon = new GameWon();
 
         Level levels = new Level(1);
 
@@ -54,6 +64,7 @@ namespace MohawkGame2D
         {
             Window.ClearBackground(Color.Gray);
 
+            #region Menus
             // title screen
             if (!isGameStarted)
             {
@@ -69,7 +80,13 @@ namespace MohawkGame2D
                 return;
             }
 
-            // if for game win
+            // victory screen
+            if (player.isPlayerAscended)
+            {
+                gameWon.Update();
+                return;
+            }
+            #endregion
 
             levelTracker = player.gameLevel; // tracks the players current level
             player.Update(platforms); // adds collision
@@ -92,7 +109,8 @@ namespace MohawkGame2D
                 platform.Update();
             }
 
-
+            DrawGameLevel();
+            
             CHEAT();
         }
 
@@ -142,6 +160,13 @@ namespace MohawkGame2D
             {
                 isGameStarted = true;
             }
+        }
+
+        void DrawGameLevel()
+        {
+            Text.Size = 17;
+            Text.Color = Color.White;
+            Text.Draw($"Current level: {levelTracker}", new Vector2(5, 5));
         }
 
         void SpikeFloor()
