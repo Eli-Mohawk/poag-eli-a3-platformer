@@ -1,238 +1,205 @@
-﻿using Raylib_cs;
-using System;
-using System.Collections.Generic;
-using System.Numerics;
-using System.Security.Cryptography.X509Certificates;
-
-// lines with comments after them (*code* //) are to show that those variables might change based on play testing
-
-/// TO-DO List
+﻿/// TO-DO List
 /// 
-/// fix TitleScreen code
+/// enter keybind in title screen
+/// 
 /// finish level 2
 /// add spikes to level 2 and give them collision
-/// add all side collision
 /// add win screen
 /// add life system
 /// add more levels
 /// add new objects and give them collision
 /// add textures
+/// add level select
+/// add restart
 /// 
 /// 
 /// add mulitplayer???
-/// add coyote time???
 /// 
 /// 
 /// remove debug keybinds (character.cs > S / L) (game.cs > L)
 /// 
 /// 
-
+using Raylib_cs;
+using System;
+using System.Collections.Generic;
+using System.Numerics;
+using System.Security.Cryptography.X509Certificates;
 
 namespace MohawkGame2D
 {
     public class Game
     {
-        Player playerMain = new Player(new Vector2(295, 525), new Vector2(10, 20)); // starting location and player size
+        bool isGameStarted = false;
 
-        List<Platform> platformLevelAll = new List<Platform>();
-        List<Spike> spikes = new List<Spike>();
+        int levelTracker = 1;
 
-        Spike spikeFloor = new Spike(new Vector2(4, 600 - 10), new Vector2(8, 600), new Vector2(0, 600));
+        Player player = new Player();
 
-        Death gameOver = new Death();
+        List<Platform> platforms = new List<Platform>();
 
-        // controls the current level
-        public static int levelTracker = 1;
+        List<Spike> spikeFloor = new List<Spike>();
 
-        bool isTitleShown = true; 
+        GameOver gameOver = new GameOver();
 
         public void Setup()
         {
             Window.SetSize(800, 600);
             Window.SetTitle("A game about ascending");
+
+            player.position = player.startPosition;
+
+            SpikeFloor();
         }
 
         public void Update()
         {
             Window.ClearBackground(Color.Gray);
 
-
-
-
-            // DEBUGGING
-            // DEBUGGING
-            // DEBUGGING
-            if (Input.IsKeyboardKeyPressed(KeyboardInput.L) && playerMain.level == 1)
-            {
-                isTitleShown = true;
-            }
-
-
-
-
-
-
-            if (isTitleShown)
+            // title screen
+            if (!isGameStarted)
             {
                 Window.ClearBackground(Color.Black);
-                TitleScreen();
+                DrawTitleScreen();
                 return;
             }
 
-
-            // if the game is over then it does the game over screen and timer and stops running everything else (players, platforms, collision, etc.)
-            if (gameOver.IsGameOver())
+            // game over screen
+            if (player.isPlayerDead)
             {
                 gameOver.Update();
                 return;
             }
 
-            levelTracker = playerMain.level;
-            playerMain.Update();
+            // if for game win
 
-            // creates and adds collision to each platform in the platformLevelAll list
-            foreach (Platform platform in platformLevelAll)
+            levelTracker = player.gameLevel;
+            player.Update(platforms);
+
+            if (levelTracker == 1)
             {
-                platform.Generate();
-
-                playerMain.Collision(platformLevelAll);
-            }
-           
-            playerMain.Generate();
-
-            // starts the Death code
-            if (playerMain.isDead)
-            {
-                gameOver.Start();
+                foreach (Spike spike in spikeFloor)
+                {
+                    spike.Update();
+                }
             }
 
-            if (playerMain.isWin)
+            foreach (Platform platform in platforms)
             {
-
+                platform.Update();
             }
+            platforms.Clear();
+            TEMP();
 
-            //clears and draws the level
-            platformLevelAll.Clear();
-            GameLevels();
-
-            spikeFloor.Generate();
+            CHEAT();
         }
 
-        void GameLevels()
+        void TEMP()
         {
             if (levelTracker == 1)
             {
-                LevelOne();
+                TEMP2();
             }
 
             if (levelTracker == 2)
             {
-                LevelTwo();
+                TEMP3();
             }
         }
 
-        void LevelOne()
+        void TEMP2()
         {
-            platformLevelAll.Add(new Platform(new Vector2(260, 550), new Vector2(90, 20)));
-            platformLevelAll.Add(new Platform(new Vector2(150, 490), new Vector2(60, 20)));
-            platformLevelAll.Add(new Platform(new Vector2(230, 420), new Vector2(35, 20)));
-            platformLevelAll.Add(new Platform(new Vector2(310, 380), new Vector2(35, 20)));
-            platformLevelAll.Add(new Platform(new Vector2(500, 540), new Vector2(40, 20)));
-            platformLevelAll.Add(new Platform(new Vector2(550, 465), new Vector2(60, 20)));
-            platformLevelAll.Add(new Platform(new Vector2(680, 420), new Vector2(40, 20)));
-            platformLevelAll.Add(new Platform(new Vector2(605, 350), new Vector2(65, 20)));
-            platformLevelAll.Add(new Platform(new Vector2(545, 300), new Vector2(30, 20)));
-            platformLevelAll.Add(new Platform(new Vector2(430, 265), new Vector2(10, 10)));
-            platformLevelAll.Add(new Platform(new Vector2(250, 280), new Vector2(50, 20)));
-            platformLevelAll.Add(new Platform(new Vector2(100, 220), new Vector2(80, 20)));
-            platformLevelAll.Add(new Platform(new Vector2(0, 155), new Vector2(50, 20)));
-            platformLevelAll.Add(new Platform(new Vector2(130, 90), new Vector2(15, 15)));
-            platformLevelAll.Add(new Platform(new Vector2(225, 80), new Vector2(10, 10)));
-            platformLevelAll.Add(new Platform(new Vector2(305, 35), new Vector2(100, 20)));
+            platforms.Add(new Platform(new Vector2(260, 550), new Vector2(90, 20)));
+            platforms.Add(new Platform(new Vector2(260, 550), new Vector2(90, 20)));
+            platforms.Add(new Platform(new Vector2(150, 490), new Vector2(60, 20)));
+            platforms.Add(new Platform(new Vector2(230, 420), new Vector2(35, 20)));
+            platforms.Add(new Platform(new Vector2(310, 380), new Vector2(35, 20)));
+            platforms.Add(new Platform(new Vector2(500, 540), new Vector2(40, 20)));
+            platforms.Add(new Platform(new Vector2(550, 465), new Vector2(60, 20)));
+            platforms.Add(new Platform(new Vector2(680, 420), new Vector2(40, 20)));
+            platforms.Add(new Platform(new Vector2(605, 350), new Vector2(65, 20)));
+            platforms.Add(new Platform(new Vector2(545, 300), new Vector2(30, 20)));
+            platforms.Add(new Platform(new Vector2(430, 265), new Vector2(10, 10)));
+            platforms.Add(new Platform(new Vector2(250, 280), new Vector2(50, 20)));
+            platforms.Add(new Platform(new Vector2(100, 220), new Vector2(80, 20)));
+            platforms.Add(new Platform(new Vector2(0, 155), new Vector2(50, 20)));
+            platforms.Add(new Platform(new Vector2(130, 90), new Vector2(15, 15)));
+            platforms.Add(new Platform(new Vector2(225, 80), new Vector2(10, 10)));
+            platforms.Add(new Platform(new Vector2(305, 35), new Vector2(100, 20)));
         }
 
-        void LevelTwo()
+        void TEMP3()
         {
-            platformLevelAll.Add(new Platform(new Vector2(260, 550), new Vector2(90, 20)));
+            platforms.Add(new Platform(new Vector2(260, 550), new Vector2(90, 20)));
+            platforms.Add(new Platform(new Vector2(0, 155), new Vector2(50, 20)));
         }
 
-        void TitleScreen()
+        void DrawTitleScreen()
         {
-            // title colors for reusablility purposes
-            Color[] textColors = new Color[]
+            // array for title colors
+            Color[] titleScreenColors = new Color[]
             {
-                new Color(240, 124, 120),
-                new Color(186, 73, 69)
+                new Color(240, 124, 120), // main title color
+                new Color(186, 73, 69), // background title color
+                new Color(255, 255, 255) // header color
             };
 
-            Vector2[] text = new Vector2[]
-            {
-                new Vector2(300, 25),
-                new Vector2(200, 50),
+            // array for x allignment
+            int controlStartX = 105; // control tab
+            int objectiveStartX = 480; // objective tab
+            int[] xPosition = [controlStartX, objectiveStartX];
 
-                new Vector2(100, 100),
-                new Vector2(225, 35),
-
-                new Vector2(100, 145),
-                new Vector2(225, 250),
-
-                new Vector2(475, 100),
-                new Vector2(275, 35),
-
-                new Vector2(475, 145),
-                new Vector2(275, 250),
-            };
-
-            Draw.LineSize = 1;
-            Draw.LineColor = Color.White;
-            Draw.FillColor = Color.Clear;
-            Draw.Rectangle(text[0], text[1]); // Title
-            Draw.Rectangle(text[2], text[3]); // control name
-            Draw.Rectangle(text[4], text[5]); // controls
-            Draw.Rectangle(text[6], text[7]); // objective name
-            Draw.Rectangle(text[8], text[9]); // objectives
-
-            int controls = 105;
-            int objectives = 480;
-
-            int[] tT = [controls, objectives];
-
-
-
-            
-
-
-            Text.Color = textColors[1];
+            // title
+            Text.Color = titleScreenColors[1];
             Text.Size = 45;
             Text.Draw("-Ascent-", new Vector2(307, 33));
-            Text.Color = textColors[0];
+            Text.Color = titleScreenColors[0];
             Text.Draw("-Ascent-", new Vector2(304, 30));
 
-
-            Text.Color = Color.White;
+            // headers
+            Text.Color = titleScreenColors[2];
             Text.Size = 35;
-            Text.Draw("Controls", new Vector2(tT[0], 104));
-            Text.Draw("Objective", new Vector2(tT[1], 102));
+            Text.Draw("Controls", new Vector2(xPosition[0], 104));
+            Text.Draw("Objective", new Vector2(xPosition[1], 102));
 
+            // info
             Text.Size = 16;
-            Text.Draw("- W/Up: Jump", new Vector2(tT[0], 155));
-            Text.Draw("- A/Left: Move Left", new Vector2(tT[0], 175));
-            Text.Draw("- D/Right: Move Right", new Vector2(tT[0], 195));
+            Text.Draw("- W/Up: Jump", new Vector2(xPosition[0], 155));
+            Text.Draw("- A/Left: Move Left", new Vector2(xPosition[0], 175));
+            Text.Draw("- D/Right: Move Right", new Vector2(xPosition[0], 195));
 
-            Text.Draw("- go up", new Vector2(tT[1], 153));
-
-
+            Text.Draw("- Make your way up the", new Vector2(xPosition[1], 155));
+            Text.Draw("mountian to reach the long lost", new Vector2(xPosition[1], 175));
+            Text.Draw("ice cream cone", new Vector2(xPosition[1], 195));
 
             // starts the game
             if (Input.IsKeyboardKeyPressed(KeyboardInput.Enter))
             {
-                isTitleShown = false;
+                isGameStarted = true;
             }
         }
 
-        void Pause()
+        void SpikeFloor()
         {
-            System.Threading.Thread.Sleep(1000000000);
+            Vector2 top = new Vector2(4, 590);
+            Vector2 right = new Vector2(8, 600);
+            Vector2 left = new Vector2(0, 600);
+
+            for (int spikeCount = 0; spikeCount < 100; spikeCount++)
+            {
+                int spikeGap = spikeCount * 8;
+
+                Spike newSpike = new Spike(new Vector2(top.X + spikeGap, top.Y), new Vector2(right.X + spikeGap, right.Y), new Vector2(left.X + spikeGap, left.Y));
+
+                spikeFloor.Add(newSpike);
+            }
+        }
+
+        void CHEAT()
+        {
+            if (Input.IsKeyboardKeyPressed(KeyboardInput.L) && player.gameLevel == 1)
+            {
+                isGameStarted = false;
+            }
         }
     }
 }
