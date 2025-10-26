@@ -227,7 +227,7 @@ namespace MohawkGame2D
             }
             if (Input.IsKeyboardKeyPressed(KeyboardInput.Y))
             {
-                lives += 1;
+                lives += 10;
             }
         }
     }
