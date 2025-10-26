@@ -11,6 +11,9 @@ namespace MohawkGame2D
     {
         public int currentLevel;
 
+        Vector2 startPosition = new Vector2(260, 550);
+        Vector2 startSize = new Vector2(90, 20);
+
         public Level(int currentLevel)
         {
             this.currentLevel = currentLevel;
@@ -74,13 +77,15 @@ namespace MohawkGame2D
         void LevelTest(List<Platform> platforms)
         {
             platforms.Add(new Platform(new Vector2(0, 0), new Vector2(0, 0)));
+            //LevelOne(platforms);
+
 
         }
 
         #region Levels
         void LevelOne(List<Platform> platforms)
         {
-            platforms.Add(new Platform(new Vector2(260, 550), new Vector2(90, 20)));
+            platforms.Add(new Platform(startPosition, startSize));
             platforms.Add(new Platform(new Vector2(260, 550), new Vector2(90, 20)));
             platforms.Add(new Platform(new Vector2(150, 490), new Vector2(60, 20)));
             platforms.Add(new Platform(new Vector2(230, 420), new Vector2(35, 20)));
@@ -101,7 +106,7 @@ namespace MohawkGame2D
 
         void LevelTwo(List<Platform> platforms)
         {
-            platforms.Add(new Platform(new Vector2(260, 550), new Vector2(90, 20)));
+            platforms.Add(new Platform(startPosition, startSize));
             platforms.Add(new Platform(new Vector2(440, 495), new Vector2(30, 10)));
             platforms.Add(new Platform(new Vector2(470, 370), new Vector2(20, 135)));
             platforms.Add(new Platform(new Vector2(440, 425), new Vector2(30, 10)));
@@ -128,7 +133,18 @@ namespace MohawkGame2D
 
         void LevelThree(List<Platform> platforms)
         {
-
+            platforms.Add(new Platform(startPosition, startSize));
+            platforms.Add(new Platform(new Vector2(440, 490), new Vector2(70, 20)));
+            platforms.Add(new Platform(new Vector2(585, 420), new Vector2(40, 20)));
+            platforms.Add(new Platform(new Vector2(475, 365), new Vector2(55, 20)));
+            platforms.Add(new Platform(new Vector2(345, 390), new Vector2(35, 20)));
+            platforms.Add(new Platform(new Vector2(220, 395), new Vector2(60, 20)));
+            platforms.Add(new Platform(new Vector2(160, 325), new Vector2(30, 20)));
+            platforms.Add(new Platform(new Vector2(65, 250), new Vector2(60, 20)));
+            platforms.Add(new Platform(new Vector2(180, 190), new Vector2(25, 20)));
+            platforms.Add(new Platform(new Vector2(100, 120), new Vector2(15, 20)));
+            platforms.Add(new Platform(new Vector2(0, 80), new Vector2(40, 20)));
+            platforms.Add(new Platform(new Vector2(140, 25), new Vector2(100, 20)));
         }
 
         void LevelFour(List<Platform> platforms)
