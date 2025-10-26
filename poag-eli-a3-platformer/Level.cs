@@ -14,6 +14,22 @@ namespace MohawkGame2D
         Vector2 startPosition = new Vector2(260, 550);
         Vector2 startSize = new Vector2(90, 20);
 
+        #region Level titles
+        String[] levelNames;
+        String levelOne = "Level 1: The Base";
+        String levelTwo = "Level 2: The Pillars";
+        String levelThree = "Level 3: Zigzag";
+        String levelFour = "Level 4: False Peak";
+        String levelFive = "Level 5: True Start";
+        String levelSix = "Level 6: ";
+        String levelSeven = "Level 7: ";
+        String levelEight = "Level 8: ";
+        String levelNine = "Level 9: ";
+        String levelTen = "Level 10: The Peak";
+
+        public Vector2 levelTitle = new Vector2(5, 10);
+        #endregion
+
         public Level(int currentLevel)
         {
             this.currentLevel = currentLevel;
@@ -21,12 +37,13 @@ namespace MohawkGame2D
 
         public void Setup()
         {
-
+            levelNames = [levelOne, levelTwo, levelThree, levelFour, levelFive, levelSix, levelSeven, levelEight, levelNine, levelTen];
         }
 
         public void Update(List<Platform> platforms)
         {
             Levels(platforms);
+            DrawLevelTitle();
         }
 
         void Levels(List<Platform> platforms)
@@ -79,7 +96,24 @@ namespace MohawkGame2D
             platforms.Add(new Platform(new Vector2(0, 0), new Vector2(0, 0)));
             //LevelOne(platforms);
 
+            platforms.Add(new Platform(startPosition, startSize));
+            platforms.Add(new Platform(new Vector2(150, 500), new Vector2(10, 10)));
+            platforms.Add(new Platform(new Vector2(35, 445), new Vector2(10, 10)));
+            platforms.Add(new Platform(new Vector2(140, 410), new Vector2(10, 10)));
+            platforms.Add(new Platform(new Vector2(215, 350), new Vector2(10, 10)));
+            platforms.Add(new Platform(new Vector2(0, 0), new Vector2(10, 10)));
+            platforms.Add(new Platform(new Vector2(0, 0), new Vector2(10, 10)));
+            platforms.Add(new Platform(new Vector2(0, 0), new Vector2(10, 10)));
+            platforms.Add(new Platform(new Vector2(0, 0), new Vector2(10, 10)));
+            platforms.Add(new Platform(new Vector2(0, 0), new Vector2(10, 10)));
+            platforms.Add(new Platform(new Vector2(0, 0), new Vector2(10, 10)));
+            platforms.Add(new Platform(new Vector2(0, 0), new Vector2(10, 10)));
+            platforms.Add(new Platform(new Vector2(0, 0), new Vector2(10, 10)));
+        }
 
+        void DrawLevelTitle()
+        {
+            Text.Draw(levelNames[currentLevel - 1], levelTitle);
         }
 
         #region Levels

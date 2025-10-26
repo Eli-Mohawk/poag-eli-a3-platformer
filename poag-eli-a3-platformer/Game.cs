@@ -3,9 +3,6 @@
 /// title screen:
 /// change objective to info (e.g. fall = return to prev. level)
 /// 
-/// game over screen:
-/// finish visuals
-/// 
 /// game won screen:
 /// finish visuals
 /// add restart
@@ -21,7 +18,8 @@
 /// add new objects (e.g. new spike types / falling platforms)
 /// add VERY hard parkour for heart items that give 1 life
 /// add an invisible platform that takes you out of the map for a special ending
-/// add multiplayer
+/// lose a life but set it so you wont fall below that level???
+/// add multiplayer???
 /// add textures
 /// remove debug keybinds (character.cs > S / L) (game.cs > L)
 
@@ -58,6 +56,8 @@ namespace MohawkGame2D
             player.position = player.startPosition;
 
             SpikeFloor();
+
+            levels.Setup();
         }
 
         public void Update()
@@ -94,6 +94,7 @@ namespace MohawkGame2D
             platforms.Clear(); // remove all platforms
             levels.Update(platforms); // run level code
 
+
             // makes floor spikes when on level one
             if (levelTracker == 1)
             {
@@ -109,7 +110,6 @@ namespace MohawkGame2D
                 platform.Update();
             }
 
-            DrawGameLevel();
             
             CHEAT();
         }
@@ -160,13 +160,6 @@ namespace MohawkGame2D
             {
                 isGameStarted = true;
             }
-        }
-
-        void DrawGameLevel()
-        {
-            Text.Size = 17;
-            Text.Color = Color.White;
-            Text.Draw($"Current level: {levelTracker}", new Vector2(5, 5));
         }
 
         void SpikeFloor()
