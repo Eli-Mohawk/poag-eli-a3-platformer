@@ -130,7 +130,7 @@ namespace MohawkGame2D
                 velocity.X = 0;
             }
 
-            if (position.Y + size.Y >= Window.Height - 10)
+            if (position.Y + size.Y >= Window.Height)
             {
                 // previous level
                 if (gameLevel > 1)

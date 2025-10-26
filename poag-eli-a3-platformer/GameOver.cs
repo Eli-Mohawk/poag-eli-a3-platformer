@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -11,7 +12,7 @@ namespace MohawkGame2D
     {
         // makes the game over screen display for a set amount of time
         float gameOverTimer = 0;
-        float gameOverDuration = 2;
+        float gameOverDuration = 5;
 
         public void Setup()
         {
@@ -32,14 +33,18 @@ namespace MohawkGame2D
 
         void DrawGameOverScreen()
         {
-            Draw.LineSize = 0;
+            Draw.LineSize = 5;
+            Draw.LineColor = Color.Red;
             Draw.FillColor = Color.Black;
             Draw.Rectangle(new Vector2(0, 0), new Vector2(Window.Width, Window.Height));
 
             Text.Size = 70;
             Text.Color = Color.Red;
-            Text.Draw("ERROR!!!", new Vector2(250, 100));
-            Text.Draw("FAILURE", new Vector2(130, 200));
+            Text.Draw("Game Over!", new Vector2(217.5f, 20));
+
+            Text.Size = 30;
+            Text.Draw("System self destruct", new Vector2(237.5f, 270));
+            Text.Draw($"will occur in {Math.Round(gameOverDuration - gameOverTimer)}", new Vector2(237.5f, 300));
         }
     }
 }

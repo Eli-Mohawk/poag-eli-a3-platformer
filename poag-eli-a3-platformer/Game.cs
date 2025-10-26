@@ -12,9 +12,9 @@
 /// add level select?
 /// 
 /// levels:
-/// add platforms to level 2-10
-/// playtest every level / whole game
+/// add platforms to level 4-10
 /// level title with delta time
+/// playtest whole game
 /// remove leveltest
 /// 
 /// general:
