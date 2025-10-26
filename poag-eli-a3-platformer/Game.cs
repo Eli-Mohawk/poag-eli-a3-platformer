@@ -10,12 +10,11 @@
 /// 
 /// levels:
 /// add platforms to level 4-10
-/// level title with delta time
 /// playtest whole game
 /// remove leveltest
 /// 
 /// general:
-/// add new objects (e.g. new spike types / falling platforms)
+/// add new objects (e.g. falling platforms)
 /// add VERY hard parkour for heart items that give 1 life
 /// add an invisible platform that takes you out of the map for a special ending
 /// lose a life but set it so you wont fall below that level???
@@ -40,8 +39,7 @@ namespace MohawkGame2D
         Player player = new Player();
 
         List<Platform> platforms = new List<Platform>();
-
-        List<Spike> spikeFloor = new List<Spike>();
+        List<Spike> spikes = new List<Spike>();
 
         GameOver gameOver = new GameOver();
         GameWon gameWon = new GameWon();
@@ -54,8 +52,6 @@ namespace MohawkGame2D
             Window.SetTitle("A game about ascending");
 
             player.position = player.startPosition;
-
-            SpikeFloor();
 
             levels.Setup();
         }
@@ -89,21 +85,19 @@ namespace MohawkGame2D
             #endregion
 
             levelTracker = player.gameLevel; // tracks the players current level
-            player.Update(platforms); // adds collision
+            player.Update(platforms, spikes); // adds collision
             levels.currentLevel = levelTracker; // makes the display level = to the game level
             platforms.Clear(); // remove all platforms
-            levels.Update(platforms); // run level code
+            spikes.Clear(); // remove all spikes
+            levels.Update(platforms, spikes); // run level code
 
 
-            // makes floor spikes when on level one
-            if (levelTracker == 1)
+            // makes the spikes
+            foreach (Spike spike in spikes)
             {
-                foreach (Spike spike in spikeFloor)
-                {
-                    spike.Update();
-                }
+                spike.Update();
             }
-
+           
             // makes the platforms
             foreach (Platform platform in platforms)
             {
@@ -159,22 +153,6 @@ namespace MohawkGame2D
             if (Input.IsKeyboardKeyPressed(KeyboardInput.Enter))
             {
                 isGameStarted = true;
-            }
-        }
-
-        void SpikeFloor()
-        {
-            Vector2 top = new Vector2(4, 590);
-            Vector2 right = new Vector2(8, 600);
-            Vector2 left = new Vector2(0, 600);
-
-            for (int spikeCount = 0; spikeCount < 100; spikeCount++)
-            {
-                int spikeGap = spikeCount * 8;
-
-                Spike newSpike = new Spike(new Vector2(top.X + spikeGap, top.Y), new Vector2(right.X + spikeGap, right.Y), new Vector2(left.X + spikeGap, left.Y));
-
-                spikeFloor.Add(newSpike);
             }
         }
 

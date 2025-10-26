@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Numerics;
 using System.Reflection.Emit;
@@ -30,9 +31,9 @@ namespace MohawkGame2D
 
         }
 
-        public void Update(List<Platform> platforms)
+        public void Update(List<Platform> platforms, List<Spike> spikes)
         {
-            Physics(platforms);
+            Physics(platforms, spikes);
             PlayerInputs();
             DrawPlayer();
             LifeSystem();
@@ -71,12 +72,12 @@ namespace MohawkGame2D
             Draw.Rectangle(position, size);
         }
 
-        void Physics(List<Platform> platforms)
+        void Physics(List<Platform> platforms, List<Spike> spikes)
         {
             velocity.Y += gravity;
             position.X += velocity.X;
 
-            #region horizontal collision detection
+            #region horizontal platform collision detection
             foreach (Platform platform in platforms)
             {
                 if (CollisionDetection.CheckCollision(position, size, platform.position, platform.size))
@@ -98,7 +99,7 @@ namespace MohawkGame2D
             position.Y += velocity.Y;
             isPlayerGrounded = false;
 
-            #region vertical collision detection
+            #region vertical platform collision detection
             foreach (Platform platform in platforms)
             {
                 if (CollisionDetection.CheckCollision(position, size, platform.position, platform.size))
@@ -114,6 +115,20 @@ namespace MohawkGame2D
                         position.Y = platform.position.Y + platform.size.Y;
                         velocity.Y = 0;
                     }
+                }
+            }
+            #endregion
+
+            #region spike collision detection
+            foreach (Spike spike in spikes)
+            {
+                RectangleF spikeHitbox = spike.GetHitbox();
+                if (CollisionDetection.CheckCollision(position, size, new Vector2(spikeHitbox.X, spikeHitbox.Y), new Vector2(spikeHitbox.Width, spikeHitbox.Height)))
+                {
+                    lives -= 1;
+                    position = startPosition;
+                    velocity = new Vector2(0, 0);
+                    break;
                 }
             }
             #endregion
