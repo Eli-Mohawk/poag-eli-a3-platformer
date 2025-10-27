@@ -33,7 +33,7 @@ namespace MohawkGame2D
 
         void DrawSpike()
         {
-            Draw.LineSize = 1;
+            Draw.LineSize = 2;
             Draw.LineColor = Color.Red;
             Draw.FillColor = Color.Clear;
             Draw.Triangle(top, right, left);

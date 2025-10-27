@@ -21,6 +21,7 @@
 /// add multiplayer???
 /// add textures
 /// remove debug keybinds (character.cs > S / L) (game.cs > L)
+/// add info the readme (similar but more stuff than title)
 
 using Raylib_cs;
 using System;

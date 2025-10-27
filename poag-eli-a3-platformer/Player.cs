@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Numerics;
 using System.Reflection.Emit;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,6 +12,9 @@ namespace MohawkGame2D
 {
     public class Player
     {
+
+        bool isFlyCheat = false; // CHEAT
+
         public Vector2 startPosition = new Vector2(295, 525);
         public Vector2 position;
         public Vector2 size = new Vector2(10, 20);
@@ -152,12 +156,14 @@ namespace MohawkGame2D
                 {
                     gameLevel -= 1;
                     position = startPosition;
+                    velocity.Y = 0;
                 }
-                // lose the game
+                // lose a life
                 else
                 {
                     lives -= 1;
                     position = startPosition;
+                    velocity.Y = 0;
                 }
             }
 
@@ -186,7 +192,7 @@ namespace MohawkGame2D
             bool isPlayerMovingRight = Input.IsKeyboardKeyDown(KeyboardInput.D) || Input.IsKeyboardKeyDown(KeyboardInput.Right);
             bool isPlayerStopRight = Input.IsKeyboardKeyReleased(KeyboardInput.D) || Input.IsKeyboardKeyReleased(KeyboardInput.Right);
 
-            // jump
+            // jump / cancel
             if (isPlayerJumping && isPlayerGrounded)
             {
                 velocity.Y = -10f;
@@ -229,10 +235,62 @@ namespace MohawkGame2D
 
         void CHEATS()
         {
-            if (Input.IsKeyboardKeyPressed(KeyboardInput.S))
+            #region Flight
+            if (Input.IsKeyboardKeyPressed(KeyboardInput.H))
             {
-                velocity.Y = -10f;
+                isFlyCheat = true;
             }
+            if (isFlyCheat && Input.IsKeyboardKeyPressed(KeyboardInput.J))
+            {
+                isFlyCheat = false;
+                gravity = 0.6f;
+            }
+            if (isFlyCheat)
+            {
+                gravity = 0;
+                if (Input.IsKeyboardKeyDown(KeyboardInput.S))
+                {
+                    velocity.Y = 10;
+                }
+                else if (Input.IsKeyboardKeyReleased(KeyboardInput.S))
+                {
+                    velocity.Y = 0;
+                }
+
+                if (Input.IsKeyboardKeyDown(KeyboardInput.Space))
+                {
+                    velocity.Y = -10;
+                }
+                else if (Input.IsKeyboardKeyReleased(KeyboardInput.Space))
+                {
+                    velocity.Y = 0;
+                }
+
+                if (Input.IsKeyboardKeyDown(KeyboardInput.A))
+                {
+                    velocity.X = -10;
+                }
+                else if (Input.IsKeyboardKeyReleased(KeyboardInput.A))
+                {
+                    velocity.X = 0;
+                }
+
+                if (Input.IsKeyboardKeyDown(KeyboardInput.D))
+                {
+                    velocity.X = 10;
+                }
+                else if (Input.IsKeyboardKeyReleased(KeyboardInput.D))
+                {
+                    velocity.X = 0;
+                }
+            }
+            #endregion
+
+            if (Input.IsKeyboardKeyPressed(KeyboardInput.S) && !isFlyCheat)
+            {
+                velocity.Y = -10;
+            }
+
             if (Input.IsKeyboardKeyPressed(KeyboardInput.L))
             {
                 if (gameLevel > 1)
@@ -240,6 +298,7 @@ namespace MohawkGame2D
                     gameLevel -= 1;
                 }
             }
+
             if (Input.IsKeyboardKeyPressed(KeyboardInput.Y))
             {
                 lives += 10;
