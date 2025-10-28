@@ -40,17 +40,17 @@ namespace MohawkGame2D
             levelNames = [levelOne, levelTwo, levelThree, levelFour, levelFive, levelSix, levelSeven, levelEight, levelNine, levelTen];
         }
 
-        public void Update(List<Platform> platforms, List<Spike> spikes)
+        public void Update(List<Platform> platforms, List<Spike> spikes, List<MovingPlatform> movingPlatforms)
         {
-            Levels(platforms, spikes);
+            Levels(platforms, spikes, movingPlatforms);
             DrawLevelTitle();
         }
 
-        void Levels(List<Platform> platforms, List<Spike> spikes)
+        void Levels(List<Platform> platforms, List<Spike> spikes, List<MovingPlatform> movingPlatforms)
         {
             if (currentLevel == 1)
             {
-                LevelTest(platforms, spikes);
+                LevelTest(platforms, spikes, movingPlatforms);
                 //LevelOne(platforms, spikes);
             }
             if (currentLevel == 2)
@@ -75,29 +75,32 @@ namespace MohawkGame2D
             }
             if (currentLevel == 7)
             {
-                LevelSeven(platforms, spikes);
+                LevelSeven(platforms, spikes, movingPlatforms);
             }
             if (currentLevel == 8)
             {
-                LevelEight(platforms, spikes);
+                LevelEight(platforms, spikes, movingPlatforms);
             }
             if (currentLevel == 9)
             {
-                LevelNine(platforms, spikes);
+                LevelNine(platforms, spikes, movingPlatforms);
             }
             if (currentLevel == 10)
             {
-                LevelTen(platforms, spikes);
+                LevelTen(spikes, movingPlatforms);
             }
         }
 
-        void LevelTest(List<Platform> platforms, List<Spike> spikes)
+        void LevelTest(List<Platform> platforms, List<Spike> spikes, List<MovingPlatform> movingPlatforms)
         {
             platforms.Add(new Platform(new Vector2(0, 0), new Vector2(0, 0)));
             spikes.Add(new Spike(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0)));
             //LevelOne(platforms, spikes);
 
+            platforms.Add(new Platform(startPosition, startSize));
+            movingPlatforms.Add(new MovingPlatform(new Vector2(300, 300), new Vector2(60, 20), new Vector2(5, 0)));
             
+
         }
 
         void DrawLevelTitle()
@@ -287,22 +290,22 @@ namespace MohawkGame2D
             spikes.Add(new Spike(new Vector2(565, 55), new Vector2(570, 75), new Vector2(560, 75))); // p12 T
         }
 
-        void LevelSeven(List<Platform> platforms, List<Spike> spikes)
+        void LevelSeven(List<Platform> platforms, List<Spike> spikes, List<MovingPlatform> movingPlatforms)
         {
 
         }
 
-        void LevelEight(List<Platform> platforms, List<Spike> spikes)
+        void LevelEight(List<Platform> platforms, List<Spike> spikes, List<MovingPlatform> movingPlatforms)
         {
 
         }
 
-        void LevelNine(List<Platform> platforms, List<Spike> spikes)
+        void LevelNine(List<Platform> platforms, List<Spike> spikes, List<MovingPlatform> movingPlatforms)
         {
 
         }
 
-        void LevelTen(List<Platform> platforms, List<Spike> spikes)
+        void LevelTen(List<Spike> spikes, List<MovingPlatform> movingPlatforms)
         {
 
         }

@@ -35,9 +35,9 @@ namespace MohawkGame2D
 
         }
 
-        public void Update(List<Platform> platforms, List<Spike> spikes)
+        public void Update(List<Platform> platforms, List<Spike> spikes, List<MovingPlatform> movingPlatforms)
         {
-            Physics(platforms, spikes);
+            Physics(platforms, spikes, movingPlatforms);
             PlayerInputs();
             DrawPlayer();
             LifeSystem();
@@ -76,7 +76,7 @@ namespace MohawkGame2D
             Draw.Rectangle(position, size);
         }
 
-        void Physics(List<Platform> platforms, List<Spike> spikes)
+        void Physics(List<Platform> platforms, List<Spike> spikes, List<MovingPlatform> movingPlatforms)
         {
             velocity.Y += gravity;
             position.X += velocity.X;
@@ -93,6 +93,22 @@ namespace MohawkGame2D
                     else if (velocity.X < 0) // moving left
                     {
                         position.X = platform.position.X + platform.size.X;
+                    }
+
+                    velocity.X = 0;
+                }
+            }
+            foreach (MovingPlatform movingPlatform in movingPlatforms)
+            {
+                if (CollisionDetection.CheckCollision(position, size, movingPlatform.position, movingPlatform.size))
+                {
+                    if (velocity.X > 0) // moving right
+                    {
+                        position.X = movingPlatform.position.X - size.X;
+                    }
+                    else if (velocity.X < 0) // moving left
+                    {
+                        position.X = movingPlatform.position.X + movingPlatform.size.X;
                     }
 
                     velocity.X = 0;
@@ -117,6 +133,23 @@ namespace MohawkGame2D
                     else if (velocity.Y < 0) // jumping
                     {
                         position.Y = platform.position.Y + platform.size.Y;
+                        velocity.Y = 0;
+                    }
+                }
+            }
+            foreach (MovingPlatform movingPlatform in movingPlatforms)
+            {
+                if (CollisionDetection.CheckCollision(position, size, movingPlatform.position, movingPlatform.size))
+                {
+                    if (velocity.Y > 0) // falling
+                    {
+                        position.Y = movingPlatform.position.Y - size.Y;
+                        velocity.Y = 0;
+                        isPlayerGrounded = true;
+                    }
+                    else if (velocity.Y < 0) // jumping
+                    {
+                        position.Y = movingPlatform.position.Y + movingPlatform.size.Y;
                         velocity.Y = 0;
                     }
                 }

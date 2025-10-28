@@ -40,6 +40,7 @@ namespace MohawkGame2D
         Player player = new Player();
 
         List<Platform> platforms = new List<Platform>();
+        List<MovingPlatform> movingPlatforms = new List<MovingPlatform>();
         List<Spike> spikes = new List<Spike>();
 
         GameOver gameOver = new GameOver();
@@ -86,11 +87,12 @@ namespace MohawkGame2D
             #endregion
 
             levelTracker = player.gameLevel; // tracks the players current level
-            player.Update(platforms, spikes); // adds collision
+            player.Update(platforms, spikes, movingPlatforms); // adds collision
             levels.currentLevel = levelTracker; // makes the display level = to the game level
             platforms.Clear(); // remove all platforms
+            movingPlatforms.Clear(); // remove all moving platforms
             spikes.Clear(); // remove all spikes
-            levels.Update(platforms, spikes); // run level code
+            levels.Update(platforms, spikes, movingPlatforms); // run level code
 
 
             // makes the spikes
@@ -103,6 +105,11 @@ namespace MohawkGame2D
             foreach (Platform platform in platforms)
             {
                 platform.Update();
+            }
+
+            foreach (MovingPlatform movingPlatform in movingPlatforms)
+            {
+                movingPlatform.Update();
             }
 
             
