@@ -98,9 +98,9 @@ namespace MohawkGame2D
             //LevelOne(platforms, spikes);
 
             platforms.Add(new Platform(startPosition, startSize));
-            movingPlatforms.Add(new MovingPlatform(new Vector2(300, 300), new Vector2(60, 20), new Vector2(5, 0)));
-            
+            movingPlatforms.Add(new MovingPlatform(new Vector2(100, 300),new Vector2(500, 300), new Vector2(60, 20), new Vector2(5, 0)));
 
+            
         }
 
         void DrawLevelTitle()
