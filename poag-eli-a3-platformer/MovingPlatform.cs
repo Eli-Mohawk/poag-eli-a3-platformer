@@ -42,16 +42,16 @@ namespace MohawkGame2D
 
             if (isMovingRight)
             {
-                startPosition += moveSpeed;
+                startPosition -= moveSpeed;
 
                 if (startPosition.X >= endPosition.X || startPosition.Y >= endPosition.Y)
                 {
                     isMovingRight = false;
                 }
             }
-            else
+            else if (!isMovingRight)
             {
-                startPosition -= moveSpeed;
+                startPosition += moveSpeed;
 
                 if (startPosition.X <= endPosition.X - (endPosition.X - startPosition.X) || startPosition.Y <= endPosition.Y - (endPosition.Y - startPosition.Y))
                 {
@@ -63,7 +63,7 @@ namespace MohawkGame2D
             Draw.LineColor = Color.Blue;
             Draw.FillColor = Color.Clear;
             Draw.Rectangle(startPosition, size);
-
+            Console.WriteLine(startPosition);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,8 +22,8 @@ namespace MohawkGame2D
         String levelThree = "Level 3: Zigzag";
         String levelFour = "Level 4: False Peak";
         String levelFive = "Level 5: True Start";
-        String levelSix = "Level 6: ";
-        String levelSeven = "Level 7: ";
+        String levelSix = "Level 6: Spike Madness";
+        String levelSeven = "Level 7: Movement";
         String levelEight = "Level 8: ";
         String levelNine = "Level 9: ";
         String levelTen = "Level 10: The Peak";
@@ -98,7 +99,7 @@ namespace MohawkGame2D
             //LevelOne(platforms, spikes);
 
             platforms.Add(new Platform(startPosition, startSize));
-            movingPlatforms.Add(new MovingPlatform(new Vector2(100, 300),new Vector2(500, 300), new Vector2(60, 20), new Vector2(5, 0)));
+            movingPlatforms.Add(new MovingPlatform(new Vector2(100, 300),new Vector2(300, 300), new Vector2(60, 20), new Vector2(5, 0)));
 
             
         }

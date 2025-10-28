@@ -9,12 +9,11 @@
 /// add level select?
 /// 
 /// levels:
-/// add platforms to level 4-10
+/// add platforms to level 7-10
 /// playtest whole game
 /// remove leveltest
 /// 
 /// general:
-/// add new objects (e.g. falling platforms)
 /// add VERY hard parkour for heart items that give 1 life
 /// add an invisible platform that takes you out of the map for a special ending
 /// lose a life but set it so you wont fall below that level???
@@ -86,15 +85,17 @@ namespace MohawkGame2D
             }
             #endregion
 
+            #region Background info
             levelTracker = player.gameLevel; // tracks the players current level
             player.Update(platforms, spikes, movingPlatforms); // adds collision
             levels.currentLevel = levelTracker; // makes the display level = to the game level
             platforms.Clear(); // remove all platforms
-            movingPlatforms.Clear(); // remove all moving platforms
+            //movingPlatforms.Clear(); // remove all moving platforms
             spikes.Clear(); // remove all spikes
             levels.Update(platforms, spikes, movingPlatforms); // run level code
+            #endregion
 
-
+            #region Draw objects
             // makes the spikes
             foreach (Spike spike in spikes)
             {
@@ -111,8 +112,8 @@ namespace MohawkGame2D
             {
                 movingPlatform.Update();
             }
+            #endregion
 
-            
             CHEAT();
         }
 
