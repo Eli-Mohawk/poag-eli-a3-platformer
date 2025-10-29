@@ -100,15 +100,15 @@ namespace MohawkGame2D
             }
             foreach (MovingPlatform movingPlatform in movingPlatforms)
             {
-                if (CollisionDetection.CheckCollision(position, size, movingPlatform.startPosition, movingPlatform.size))
+                if (CollisionDetection.CheckCollision(position, size, movingPlatform.position, movingPlatform.size))
                 {
                     if (velocity.X > 0) // moving right
                     {
-                        position.X = movingPlatform.startPosition.X - size.X;
+                        position.X = movingPlatform.position.X - size.X;
                     }
                     else if (velocity.X < 0) // moving left
                     {
-                        position.X = movingPlatform.startPosition.X + movingPlatform.size.X;
+                        position.X = movingPlatform.position.X + movingPlatform.size.X;
                     }
 
                     velocity.X = 0;
@@ -139,17 +139,17 @@ namespace MohawkGame2D
             }
             foreach (MovingPlatform movingPlatform in movingPlatforms)
             {
-                if (CollisionDetection.CheckCollision(position, size, movingPlatform.startPosition, movingPlatform.size))
+                if (CollisionDetection.CheckCollision(position, size, movingPlatform.position, movingPlatform.size))
                 {
                     if (velocity.Y > 0) // falling
                     {
-                        position.Y = movingPlatform.startPosition.Y - size.Y;
+                        position.Y = movingPlatform.position.Y - size.Y;
                         velocity.Y = 0;
                         isPlayerGrounded = true;
                     }
                     else if (velocity.Y < 0) // jumping
                     {
-                        position.Y = movingPlatform.startPosition.Y + movingPlatform.size.Y;
+                        position.Y = movingPlatform.position.Y + movingPlatform.size.Y;
                         velocity.Y = 0;
                     }
                 }

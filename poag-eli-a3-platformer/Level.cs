@@ -16,13 +16,13 @@ namespace MohawkGame2D
         Vector2 startSize = new Vector2(90, 20);
 
         #region Level titles
-        String[] levelNames;
+        public String[] levelNames;
         String levelOne = "Level 1: The Base";
-        String levelTwo = "Level 2: The Pillars";
-        String levelThree = "Level 3: Zigzag";
+        String levelTwo = "Level 2: The First Hurdle";
+        String levelThree = "Level 3: The Pillars";
         String levelFour = "Level 4: False Peak";
         String levelFive = "Level 5: True Start";
-        String levelSix = "Level 6: Spike Madness";
+        String levelSix = "Level 6: The Second Hurdle";
         String levelSeven = "Level 7: Movement";
         String levelEight = "Level 8: ";
         String levelNine = "Level 9: ";
@@ -44,7 +44,6 @@ namespace MohawkGame2D
         public void Update(List<Platform> platforms, List<Spike> spikes, List<MovingPlatform> movingPlatforms)
         {
             Levels(platforms, spikes, movingPlatforms);
-            DrawLevelTitle();
         }
 
         void Levels(List<Platform> platforms, List<Spike> spikes, List<MovingPlatform> movingPlatforms)
@@ -99,14 +98,9 @@ namespace MohawkGame2D
             //LevelOne(platforms, spikes);
 
             platforms.Add(new Platform(startPosition, startSize));
-            movingPlatforms.Add(new MovingPlatform(new Vector2(100, 300),new Vector2(300, 300), new Vector2(60, 20), new Vector2(5, 0)));
+            movingPlatforms.Add(new MovingPlatform(new Vector2(200, 300), new Vector2(40, 20), new Vector2(100, 300), new Vector2(300, 300), new Vector2(3, 0)));
 
             
-        }
-
-        void DrawLevelTitle()
-        {
-            Text.Draw(levelNames[currentLevel - 1], levelTitle);
         }
 
         void DrawSpikeFloor(List<Spike> spikes)
@@ -129,6 +123,24 @@ namespace MohawkGame2D
         void LevelOne(List<Platform> platforms, List<Spike> spikes)
         {
             platforms.Add(new Platform(startPosition, startSize));
+            platforms.Add(new Platform(new Vector2(440, 490), new Vector2(70, 20)));
+            platforms.Add(new Platform(new Vector2(585, 420), new Vector2(40, 20)));
+            platforms.Add(new Platform(new Vector2(475, 365), new Vector2(55, 20)));
+            platforms.Add(new Platform(new Vector2(345, 390), new Vector2(35, 20)));
+            platforms.Add(new Platform(new Vector2(220, 395), new Vector2(60, 20)));
+            platforms.Add(new Platform(new Vector2(160, 325), new Vector2(30, 20)));
+            platforms.Add(new Platform(new Vector2(65, 250), new Vector2(60, 20)));
+            platforms.Add(new Platform(new Vector2(180, 190), new Vector2(25, 20)));
+            platforms.Add(new Platform(new Vector2(100, 120), new Vector2(15, 20)));
+            platforms.Add(new Platform(new Vector2(0, 80), new Vector2(40, 20)));
+            platforms.Add(new Platform(new Vector2(140, 25), new Vector2(100, 20)));
+
+            DrawSpikeFloor(spikes);
+        }
+
+        void LevelTwo(List<Platform> platforms)
+        {
+            platforms.Add(new Platform(startPosition, startSize));
             platforms.Add(new Platform(new Vector2(260, 550), new Vector2(90, 20)));
             platforms.Add(new Platform(new Vector2(150, 490), new Vector2(60, 20)));
             platforms.Add(new Platform(new Vector2(230, 420), new Vector2(35, 20)));
@@ -145,11 +157,9 @@ namespace MohawkGame2D
             platforms.Add(new Platform(new Vector2(130, 90), new Vector2(15, 15)));
             platforms.Add(new Platform(new Vector2(225, 80), new Vector2(10, 10)));
             platforms.Add(new Platform(new Vector2(305, 35), new Vector2(100, 20)));
-
-            DrawSpikeFloor(spikes);
         }
 
-        void LevelTwo(List<Platform> platforms)
+        void LevelThree(List<Platform> platforms)
         {
             platforms.Add(new Platform(startPosition, startSize));
             platforms.Add(new Platform(new Vector2(440, 495), new Vector2(30, 10)));
@@ -174,22 +184,6 @@ namespace MohawkGame2D
             platforms.Add(new Platform(new Vector2(280, 85), new Vector2(35, 20)));
             platforms.Add(new Platform(new Vector2(400, 85), new Vector2(75, 20)));
             platforms.Add(new Platform(new Vector2(555, 50), new Vector2(100, 20)));
-        }
-
-        void LevelThree(List<Platform> platforms)
-        {
-            platforms.Add(new Platform(startPosition, startSize));
-            platforms.Add(new Platform(new Vector2(440, 490), new Vector2(70, 20)));
-            platforms.Add(new Platform(new Vector2(585, 420), new Vector2(40, 20)));
-            platforms.Add(new Platform(new Vector2(475, 365), new Vector2(55, 20)));
-            platforms.Add(new Platform(new Vector2(345, 390), new Vector2(35, 20)));
-            platforms.Add(new Platform(new Vector2(220, 395), new Vector2(60, 20)));
-            platforms.Add(new Platform(new Vector2(160, 325), new Vector2(30, 20)));
-            platforms.Add(new Platform(new Vector2(65, 250), new Vector2(60, 20)));
-            platforms.Add(new Platform(new Vector2(180, 190), new Vector2(25, 20)));
-            platforms.Add(new Platform(new Vector2(100, 120), new Vector2(15, 20)));
-            platforms.Add(new Platform(new Vector2(0, 80), new Vector2(40, 20)));
-            platforms.Add(new Platform(new Vector2(140, 25), new Vector2(100, 20)));
         }
 
         void LevelFour(List<Platform> platforms)

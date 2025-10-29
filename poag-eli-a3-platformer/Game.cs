@@ -1,8 +1,5 @@
 ﻿/// TO-DO List
 /// 
-/// title screen:
-/// change objective to info (e.g. fall = return to prev. level)
-/// 
 /// game won screen:
 /// finish visuals
 /// add restart
@@ -21,6 +18,11 @@
 /// add textures
 /// remove debug keybinds (character.cs > S / L) (game.cs > L)
 /// add info the readme (similar but more stuff than title)
+/// 
+/// 
+/// 
+/// 
+/// foreach should be in an if with a bool so they only go once
 
 using Raylib_cs;
 using System;
@@ -34,7 +36,10 @@ namespace MohawkGame2D
     {
         bool isGameStarted = false;
 
-        public int levelTracker = 1;
+        bool isCleared = false;
+        bool isDrawn = false;
+        
+        public int levelTracker = 0;
 
         Player player = new Player();
 
@@ -46,6 +51,8 @@ namespace MohawkGame2D
         GameWon gameWon = new GameWon();
 
         Level levels = new Level(1);
+
+        Items heartItem = new Items();
 
         public void Setup()
         {
@@ -86,13 +93,19 @@ namespace MohawkGame2D
             #endregion
 
             #region Background info
-            levelTracker = player.gameLevel; // tracks the players current level
+            if (levelTracker != player.gameLevel)
+            {
+                levelTracker = player.gameLevel;
+                platforms.Clear(); // remove all platforms
+                movingPlatforms.Clear(); // remove all moving platforms
+                spikes.Clear(); // remove all spikes
+
+                levels.currentLevel = levelTracker; // makes the display level = to the game level
+                levels.Update(platforms, spikes, movingPlatforms); // run level code
+            }
+
             player.Update(platforms, spikes, movingPlatforms); // adds collision
-            levels.currentLevel = levelTracker; // makes the display level = to the game level
-            platforms.Clear(); // remove all platforms
-            //movingPlatforms.Clear(); // remove all moving platforms
-            spikes.Clear(); // remove all spikes
-            levels.Update(platforms, spikes, movingPlatforms); // run level code
+            DrawLevelTitle();
             #endregion
 
             #region Draw objects
@@ -114,7 +127,14 @@ namespace MohawkGame2D
             }
             #endregion
 
+            //heartItem.Update();
+
             CHEAT();
+        }
+
+        void DrawLevelTitle()
+        {
+            Text.Draw(levels.levelNames[levels.currentLevel - 1], levels.levelTitle);
         }
 
         void DrawTitleScreen()
@@ -152,8 +172,10 @@ namespace MohawkGame2D
             Text.Draw("- D/Right: Move Right", new Vector2(xPosition[0], 195));
 
             Text.Draw("- Make your way up the", new Vector2(xPosition[1], 155));
-            Text.Draw("mountian to reach the long lost", new Vector2(xPosition[1], 175));
-            Text.Draw("ice cream cone", new Vector2(xPosition[1], 195));
+            Text.Draw("mountian. If you fall", new Vector2(xPosition[1], 175));
+            Text.Draw("you rerturn to the previous level.", new Vector2(xPosition[1], 195));
+            Text.Draw("If you are on level one and fall,", new Vector2(xPosition[1], 215));
+            Text.Draw("you lose a life.", new Vector2(xPosition[1], 235));
 
             Text.Size = 25;
             Text.Draw("Press [Enter] to start game", new Vector2(220, 401));
