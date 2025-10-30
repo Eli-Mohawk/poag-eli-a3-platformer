@@ -27,7 +27,7 @@
 /// add textures
 /// change how detect affects velocity
 /// FINAL CODE CLEAN
-/// remove debug keybinds (character.cs > S / L) (game.cs > L)
+/// remove cheat abilities (game.cs title screen void / game.cs cheat void / player.cs cheat void / player.cs main bool)
 /// add info the readme (similar but more stuff than title)
 
 using Raylib_cs;
@@ -174,6 +174,11 @@ namespace MohawkGame2D
             Text.Draw("-Ascent-", new Vector2(305.5f, 33));
             Text.Color = titleScreenColors[0];
             Text.Draw("-Ascent-", new Vector2(302.5f, 30));
+
+            // Cheat
+            Text.Color = Color.Green;
+            Text.Size = 15;
+            Text.Draw("(Cheat Addition)", new Vector2(320, 75));
 
             // headers
             Text.Color = titleScreenColors[2];
