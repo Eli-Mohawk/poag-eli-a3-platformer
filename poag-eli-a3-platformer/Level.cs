@@ -309,7 +309,29 @@ namespace MohawkGame2D
 
         void LevelEight(List<Platform> platforms, List<Spike> spikes, List<MovingPlatform> movingPlatforms)
         {
+            platforms.Add(new Platform(startPosition, startSize));
+            platforms.Add(new Platform(new Vector2(110, 490), new Vector2(80, 20)));
+            platforms.Add(new Platform(new Vector2(110, 270), new Vector2(60, 20)));
+            platforms.Add(new Platform(new Vector2(260, 320), new Vector2(50, 20)));
+            platforms.Add(new Platform(new Vector2(410, 470), new Vector2(70, 20)));
+            platforms.Add(new Platform(new Vector2(540, 500), new Vector2(40, 20)));
+            platforms.Add(new Platform(new Vector2(480, 170), new Vector2(45, 20)));
 
+            movingPlatforms.Add(new MovingPlatform(new Vector2(-1, 200), new Vector2(25, 20), new Vector2(-1, 200), new Vector2(1, 480), new Vector2(0, 1)));
+            movingPlatforms.Add(new MovingPlatform(new Vector2(610, 205), new Vector2(30, 20), new Vector2(610, 205), new Vector2(610, 460), new Vector2(0, 1)));
+            movingPlatforms.Add(new MovingPlatform(new Vector2(390, 60), new Vector2(15, 20), new Vector2(390, 60), new Vector2(390, 220), new Vector2(0, 2)));
+
+            spikes.Add(new Spike(new Vector2(15, 360), new Vector2(20, 380), new Vector2(10, 380))); // m1 r1
+            spikes.Add(new Spike(new Vector2(5, 300), new Vector2(10, 320), new Vector2(0, 320))); // m1 l1
+            spikes.Add(new Spike(new Vector2(15, 240), new Vector2(20, 260), new Vector2(10, 260))); // m1 r2
+            spikes.Add(new Spike(new Vector2(5, 180), new Vector2(10, 200), new Vector2(0, 200))); // m1 l2
+            spikes.Add(new Spike(new Vector2(115, 250), new Vector2(120, 270), new Vector2(110, 270))); // p1
+            spikes.Add(new Spike(new Vector2(285, 300), new Vector2(290, 320), new Vector2(280, 320))); // p2
+            spikes.Add(new Spike(new Vector2(415, 450), new Vector2(420, 470), new Vector2(410, 470))); // p3 l
+            spikes.Add(new Spike(new Vector2(475, 450), new Vector2(480, 470), new Vector2(470, 470))); // p3 r
+            spikes.Add(new Spike(new Vector2(630, 420), new Vector2(635, 440), new Vector2(625, 440))); // m2 r1
+            spikes.Add(new Spike(new Vector2(620, 360), new Vector2(625, 380), new Vector2(615, 380))); // m2 l2
+            spikes.Add(new Spike(new Vector2(630, 300), new Vector2(635, 320), new Vector2(625, 320))); // m2 r2
         }
 
         void LevelNine(List<Platform> platforms, List<Spike> spikes, List<MovingPlatform> movingPlatforms)
