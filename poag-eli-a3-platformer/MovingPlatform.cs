@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,12 +14,15 @@ namespace MohawkGame2D
     {
         public Vector2 position;
         public Vector2 size;
-        Vector2 startPos;
-        Vector2 endPos;
-        Vector2 moveSpeed;
+        public Vector2 startPos;
+        public Vector2 endPos;
+        public Vector2 moveSpeed;
 
         bool isMovingRight;
         bool isMovingDown;
+
+        Vector2 previousPosition;
+        public Vector2 distance { get; private set; }
 
         public MovingPlatform(Vector2 position, Vector2 size, Vector2 startPos, Vector2 endPos, Vector2 moveSpeed)
         {
@@ -30,6 +34,9 @@ namespace MohawkGame2D
 
             isMovingRight = true;
             isMovingDown = false;
+
+            previousPosition = position;
+            distance = new Vector2(0, 0);
         }
 
         public void Setup()
@@ -40,11 +47,12 @@ namespace MohawkGame2D
         public void Update()
         {
             MovePlatform();
-            DrawPlatform(); 
+            DrawPlatform();
         }
 
         void MovePlatform()
         {
+            Vector2 pastPosition = position;
 
             if (isMovingRight)
             {
@@ -94,6 +102,9 @@ namespace MohawkGame2D
                     position.Y = startPos.Y;
                 }
             }
+
+            distance = position - pastPosition;
+            previousPosition = position;
         }
 
         void DrawPlatform()

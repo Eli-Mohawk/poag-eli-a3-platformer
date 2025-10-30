@@ -25,6 +25,8 @@ namespace MohawkGame2D
 
         public int gameLevel = 1;
 
+        public bool isDetect;
+
         public bool isPlayerDead;
         public bool isPlayerAscended;
 
@@ -146,6 +148,8 @@ namespace MohawkGame2D
                         position.Y = movingPlatform.position.Y - size.Y;
                         velocity.Y = 0;
                         isPlayerGrounded = true;
+
+                        position += movingPlatform.distance;
                     }
                     else if (velocity.Y < 0) // jumping
                     {
@@ -225,34 +229,43 @@ namespace MohawkGame2D
             bool isPlayerMovingRight = Input.IsKeyboardKeyDown(KeyboardInput.D) || Input.IsKeyboardKeyDown(KeyboardInput.Right);
             bool isPlayerStopRight = Input.IsKeyboardKeyReleased(KeyboardInput.D) || Input.IsKeyboardKeyReleased(KeyboardInput.Right);
 
-            // jump / cancel
-            if (isPlayerJumping && isPlayerGrounded)
-            {
-                velocity.Y = -10f;
-            }
+            isDetect = Input.IsKeyboardKeyDown(KeyboardInput.Space);
 
-            // move left
-            if (isPlayerMovingLeft)
+            if (!isDetect)
             {
-                velocity.X = -4;
-            }
-            else if (isPlayerStopLeft)
-            {
-                velocity.X = 0;
-            }
+                // jump
+                if (isPlayerJumping && isPlayerGrounded)
+                {
+                    velocity.Y = -10f;
+                }
 
-            // move right
-            if (isPlayerMovingRight)
-            {
-                velocity.X = 4;
-            }
-            else if (isPlayerStopRight)
-            {
-                velocity.X = 0;
-            }
+                // move left
+                if (isPlayerMovingLeft)
+                {
+                    velocity.X = -4;
+                }
+                else if (isPlayerStopLeft)
+                {
+                    velocity.X = 0;
+                }
 
-            // stop with both
-            if (isPlayerMovingLeft && isPlayerMovingRight)
+                // move right
+                if (isPlayerMovingRight)
+                {
+                    velocity.X = 4;
+                }
+                else if (isPlayerStopRight)
+                {
+                    velocity.X = 0;
+                }
+
+                // stop with both
+                if (isPlayerMovingLeft && isPlayerMovingRight)
+                {
+                    velocity.X = 0;
+                }
+            }
+            else
             {
                 velocity.X = 0;
             }

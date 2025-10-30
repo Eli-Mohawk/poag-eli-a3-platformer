@@ -13,16 +13,12 @@
 /// general:
 /// add VERY hard parkour for heart items that give 1 life
 /// add an invisible platform that takes you out of the map for a special ending
-/// lose a life but set it so you wont fall below that level???
 /// add multiplayer???
 /// add textures
+/// change how detect affects velocity
+/// FINAL CODE CLEAN
 /// remove debug keybinds (character.cs > S / L) (game.cs > L)
 /// add info the readme (similar but more stuff than title)
-/// 
-/// 
-/// 
-/// 
-/// foreach should be in an if with a bool so they only go once
 
 using Raylib_cs;
 using System;
@@ -35,6 +31,7 @@ namespace MohawkGame2D
     public class Game
     {
         bool isGameStarted = false;
+        bool isUsingDetect;
 
         bool isCleared = false;
         bool isDrawn = false;
@@ -119,11 +116,20 @@ namespace MohawkGame2D
             foreach (Platform platform in platforms)
             {
                 platform.Update();
+                
             }
 
             foreach (MovingPlatform movingPlatform in movingPlatforms)
             {
                 movingPlatform.Update();
+            }
+            #endregion
+
+            #region Detect ability
+            isUsingDetect = player.isDetect;
+            if (isUsingDetect)
+            {
+                MovingPlatformEdges(movingPlatforms);
             }
             #endregion
 
@@ -184,6 +190,27 @@ namespace MohawkGame2D
             if (Input.IsKeyboardKeyPressed(KeyboardInput.Enter))
             {
                 isGameStarted = true;
+            }
+        }
+
+        void MovingPlatformEdges(List<MovingPlatform> movingPlatforms)
+        {
+            
+            foreach (MovingPlatform movingPlatform in movingPlatforms)
+            {
+                Draw.LineSize = 1;
+                Draw.LineColor = Color.Green;
+
+                if (movingPlatform.moveSpeed.Y > 0 && movingPlatform.moveSpeed.X == 0)
+                {
+                    Draw.Line(movingPlatform.startPos, new Vector2(movingPlatform.startPos.X + movingPlatform.size.X, movingPlatform.startPos.Y));
+                    Draw.Line(movingPlatform.endPos, new Vector2(movingPlatform.endPos.X + movingPlatform.size.X, movingPlatform.endPos.Y));
+                }
+                if (movingPlatform.moveSpeed.X > 0 && movingPlatform.moveSpeed.Y == 0)
+                {
+                    Draw.Line(movingPlatform.startPos, new Vector2(movingPlatform.startPos.X, movingPlatform.startPos.Y + movingPlatform.size.Y));
+                    Draw.Line(movingPlatform.endPos, new Vector2(movingPlatform.endPos.X, movingPlatform.endPos.Y + movingPlatform.size.Y));
+                }
             }
         }
 
