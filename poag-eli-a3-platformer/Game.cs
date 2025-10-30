@@ -1,5 +1,15 @@
 ﻿/// TO-DO List
 /// 
+/// Title Screen / level 7:
+/// talk about moving platforms
+/// add new ability keybinds (space for detect)
+/// 
+/// title screen / level 5:
+/// talk about spikes
+/// 
+/// Title / readme:
+/// explain everything better
+/// 
 /// game won screen:
 /// finish visuals
 /// add restart
