@@ -12,7 +12,6 @@ namespace MohawkGame2D
 {
     public class Player
     {
-
         bool isFlyCheat = false; // CHEAT
 
         public Vector2 startPosition = new Vector2(295, 525);
@@ -29,6 +28,8 @@ namespace MohawkGame2D
 
         public bool isPlayerDead;
         public bool isPlayerAscended;
+        bool isHiddenDone;
+        public bool isTrueEnd;
 
         int lives = 3;
 
@@ -175,17 +176,28 @@ namespace MohawkGame2D
             #endregion
 
             #region Edge collision & level changing
-            if (position.X < 0)
+            // left
+            if (position.X <= 0)
             {
-                position.X = 0;
-                velocity.X = 0;
+                if (gameLevel == 7 && position.Y <= 400 && position.Y >= 200)
+                {
+                    gameLevel = 0;
+                    position = startPosition;
+                    velocity.X = 0;
+                }
+                else
+                {
+                    position.X = 0;
+                    velocity.X = 0;
+                }
             }
-            else if (position.X + size.X > Window.Width)
+            // right edge
+            if (position.X + size.X > Window.Width)
             {
                 position.X = Window.Width - size.X;
                 velocity.X = 0;
             }
-
+            // bottom
             if (position.Y + size.Y >= Window.Height)
             {
                 // previous level
@@ -198,23 +210,43 @@ namespace MohawkGame2D
                 // lose a life
                 else
                 {
-                    lives -= 1;
-                    position = startPosition;
-                    velocity.Y = 0;
+                    if (gameLevel == 0)
+                    {
+                        lives -= 10;
+                    }
+                    else
+                    {
+                        lives -= 1;
+                        position = startPosition;
+                        velocity.Y = 0;
+                    }
                 }
             }
-
+            // top
             // next level
             if (position.Y + size.Y <= 0)
             {
-                gameLevel += 1;
-                position = startPosition;
+                if (gameLevel == 0)
+                {
+                    gameLevel = 7;
+                    position = startPosition;
+                    isHiddenDone = true;
+                }
+                else
+                {
+                    gameLevel += 1;
+                    position = startPosition;
+                }
             }
 
             // win the game
-            if (gameLevel > 10)
+            if (gameLevel > 10 && !isHiddenDone)
             {
                 isPlayerAscended = true;
+            }
+            if (gameLevel > 10 && isHiddenDone)
+            {
+                isTrueEnd = true;
             }
             #endregion
         }

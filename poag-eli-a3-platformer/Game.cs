@@ -12,19 +12,16 @@
 /// 
 /// game won screen:
 /// finish visuals
-/// add restart
-/// add level select?
+/// make it a lie ending
+/// make you fall back to level one and say that you missed a level (0)
 /// 
 /// levels:
 /// add platforms to level 7-10
 /// playtest whole game
+/// add level 0
 /// remove leveltest
 /// 
 /// general:
-/// add VERY hard parkour for heart items that give 1 life
-/// add an invisible platform that takes you out of the map for a special ending
-/// add multiplayer???
-/// add textures
 /// change how detect affects velocity
 /// FINAL CODE CLEAN
 /// remove cheat abilities (game.cs title screen void / game.cs cheat void / player.cs cheat void / player.cs main bool)
@@ -56,6 +53,7 @@ namespace MohawkGame2D
 
         GameOver gameOver = new GameOver();
         GameWon gameWon = new GameWon();
+        SecretWin secretWin = new SecretWin();
 
         Level levels = new Level(1);
 
@@ -95,6 +93,12 @@ namespace MohawkGame2D
             if (player.isPlayerAscended)
             {
                 gameWon.Update();
+                return;
+            }
+
+            if (player.isTrueEnd)
+            {
+                secretWin.Update();
                 return;
             }
             #endregion
@@ -150,7 +154,7 @@ namespace MohawkGame2D
 
         void DrawLevelTitle()
         {
-            Text.Draw(levels.levelNames[levels.currentLevel - 1], levels.levelTitle);
+            Text.Draw(levels.levelNames[levels.currentLevel], levels.levelTitle);
         }
 
         void DrawTitleScreen()
@@ -225,6 +229,14 @@ namespace MohawkGame2D
                 {
                     Draw.Line(movingPlatform.startPos, new Vector2(movingPlatform.startPos.X, movingPlatform.startPos.Y + movingPlatform.size.Y));
                     Draw.Line(movingPlatform.endPos, new Vector2(movingPlatform.endPos.X, movingPlatform.endPos.Y + movingPlatform.size.Y));
+                }
+                if (movingPlatform.moveSpeed.X > 0 && movingPlatform.moveSpeed.Y > 0)
+                {
+                    Draw.Line(movingPlatform.startPos, new Vector2(movingPlatform.startPos.X + movingPlatform.size.X, movingPlatform.startPos.Y));
+                    Draw.Line(movingPlatform.startPos, new Vector2(movingPlatform.startPos.X, movingPlatform.startPos.Y + movingPlatform.size.Y));
+
+                    Draw.Line(movingPlatform.endPos, new Vector2(movingPlatform.endPos.X - movingPlatform.size.X, movingPlatform.endPos.Y));
+                    Draw.Line(movingPlatform.endPos, new Vector2(movingPlatform.endPos.X, movingPlatform.endPos.Y - movingPlatform.size.Y));
                 }
             }
         }

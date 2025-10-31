@@ -18,7 +18,13 @@ namespace MohawkGame2D
 
         public void Update()
         {
+            HeartItem();
             DrawHeartItem();
+        }
+
+        void HeartItem()
+        {
+            
         }
 
         void DrawHeartItem()
