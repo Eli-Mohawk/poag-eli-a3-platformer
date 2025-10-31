@@ -11,6 +11,9 @@ namespace MohawkGame2D
     {
         float gameWonTimer = 0;
         float gameWonDuration = 2;
+        float gameWonDurationFull = 4;
+
+        public bool isGoingToCry = false;
 
         public void Setup()
         {
@@ -22,10 +25,7 @@ namespace MohawkGame2D
             DrawGameWinScreen();
 
             gameWonTimer += Time.DeltaTime;
-            if (gameWonTimer >= gameWonDuration)
-            {
-                Text.Draw("TEST", new Vector2(350, 300));
-            }
+            DrawGameWinScreenTimed();
         }
 
         void DrawGameWinScreen()
@@ -38,6 +38,18 @@ namespace MohawkGame2D
             Text.Color = Color.Yellow;
             Text.Draw("CONGRATULATIONS!", new Vector2(250, 100));
             Text.Draw("YOU WON!", new Vector2(130, 200));
+        }
+
+        void DrawGameWinScreenTimed()
+        {
+            if (gameWonTimer >= gameWonDuration)
+            {
+                Text.Draw("TEST", new Vector2(350, 300));
+            }
+            if (gameWonTimer >= gameWonDurationFull)
+            {
+                isGoingToCry = true;
+            }
         }
     }
 }

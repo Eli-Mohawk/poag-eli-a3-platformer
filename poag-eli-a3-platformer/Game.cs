@@ -1,19 +1,13 @@
 ﻿/// TO-DO List
 /// 
-/// Title Screen / level 7:
-/// talk about moving platforms
-/// add new ability keybinds (space for detect)
-/// 
-/// title screen / level 5:
-/// talk about spikes
-/// 
 /// Title / readme:
-/// explain everything better
+/// add info button to title
+/// in info screen add return screen that takes you back to title (info code over title then bool)
+/// talk about object types (plat, spike, moveplat)
+/// talk about detect
 /// 
 /// game won screen:
-/// finish visuals
-/// make it a lie ending
-/// make you fall back to level one and say that you missed a level (0)
+/// tell the player that there is a real win (secret level)
 /// 
 /// levels:
 /// add platforms to level 7-10
@@ -22,10 +16,9 @@
 /// remove leveltest
 /// 
 /// general:
-/// change how detect affects velocity
 /// FINAL CODE CLEAN
-/// remove cheat abilities (game.cs title screen void / game.cs cheat void / player.cs cheat void / player.cs main bool)
 /// add info the readme (similar but more stuff than title)
+/// remove cheat abilities for main branch (game.cs title screen void / game.cs cheat void / player.cs cheat void / player.cs main bool)
 
 using Raylib_cs;
 using System;
@@ -93,6 +86,12 @@ namespace MohawkGame2D
             if (player.isPlayerAscended)
             {
                 gameWon.Update();
+                if (gameWon.isGoingToCry)
+                {
+                    player.gameLevel = 10;
+                    player.isPlayerAscended = false;
+                    player.isPlayerDescending = true;
+                }
                 return;
             }
 
@@ -210,6 +209,11 @@ namespace MohawkGame2D
             {
                 isGameStarted = true;
             }
+        }
+
+        void DrawInfoScreen()
+        {
+
         }
 
         void MovingPlatformEdges(List<MovingPlatform> movingPlatforms)

@@ -110,30 +110,9 @@ namespace MohawkGame2D
             movingPlatforms.Add(new MovingPlatform(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0)));
             spikes.Add(new Spike(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0)));
 
-
             platforms.Add(new Platform(startPosition, startSize));
-            platforms.Add(new Platform(new Vector2(0, 0), new Vector2(0, 0)));
-            platforms.Add(new Platform(new Vector2(0, 0), new Vector2(0, 0)));
-            platforms.Add(new Platform(new Vector2(0, 0), new Vector2(0, 0)));
-            platforms.Add(new Platform(new Vector2(0, 0), new Vector2(0, 0)));
-            platforms.Add(new Platform(new Vector2(0, 0), new Vector2(0, 0)));
-            platforms.Add(new Platform(new Vector2(0, 0), new Vector2(0, 0)));
-            platforms.Add(new Platform(new Vector2(0, 0), new Vector2(0, 0)));
+            platforms.Add(new Platform(new Vector2(200, 200), new Vector2(200, 40)));
 
-            movingPlatforms.Add(new MovingPlatform(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0)));
-            movingPlatforms.Add(new MovingPlatform(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0)));
-            movingPlatforms.Add(new MovingPlatform(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0)));
-            movingPlatforms.Add(new MovingPlatform(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0)));
-
-            spikes.Add(new Spike(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0)));
-            spikes.Add(new Spike(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0)));
-            spikes.Add(new Spike(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0)));
-            spikes.Add(new Spike(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0)));
-            spikes.Add(new Spike(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0)));
-            spikes.Add(new Spike(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0)));
-            spikes.Add(new Spike(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0)));
-            spikes.Add(new Spike(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0)));
-            spikes.Add(new Spike(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0)));
         }
 
         void DrawSpikeFloor(List<Spike> spikes)
@@ -370,7 +349,38 @@ namespace MohawkGame2D
 
         void LevelNine(List<Platform> platforms, List<Spike> spikes, List<MovingPlatform> movingPlatforms)
         {
+            platforms.Add(new Platform(startPosition, startSize));
+            platforms.Add(new Platform(new Vector2(790, 470), new Vector2(10, 10)));
+            platforms.Add(new Platform(new Vector2(690, 130), new Vector2(30, 20)));
+            platforms.Add(new Platform(new Vector2(225, 200), new Vector2(40, 10)));
+            platforms.Add(new Platform(new Vector2(285, 225), new Vector2(25, 10)));
+            platforms.Add(new Platform(new Vector2(0, 220), new Vector2(110, 20)));
+            platforms.Add(new Platform(new Vector2(110, 80), new Vector2(45, 20)));
+            platforms.Add(new Platform(new Vector2(260, 70), new Vector2(100, 20)));
 
+            movingPlatforms.Add(new MovingPlatform(new Vector2(410, 500), new Vector2(50, 20), new Vector2(410, 500), new Vector2(700, 500), new Vector2(2, 0)));
+            movingPlatforms.Add(new MovingPlatform(new Vector2(775, 180), new Vector2(25, 20), new Vector2(775, 180), new Vector2(775, 430), new Vector2(0, 1)));
+            movingPlatforms.Add(new MovingPlatform(new Vector2(320, 150), new Vector2(50, 20), new Vector2(320, 150), new Vector2(600, 150), new Vector2(2, 0)));
+            movingPlatforms.Add(new MovingPlatform(new Vector2(160, 260), new Vector2(50, 20), new Vector2(160, 260), new Vector2(370, 260), new Vector2(2, 0)));
+            movingPlatforms.Add(new MovingPlatform(new Vector2(0, 100), new Vector2(30, 10), new Vector2(0, 100), new Vector2(0, 165), new Vector2(0, 1)));
+
+            spikes.Add(new Spike(new Vector2(465, 480), new Vector2(470, 500), new Vector2(460, 500))); // m1 hl
+            spikes.Add(new Spike(new Vector2(555, 480), new Vector2(560, 500), new Vector2(550, 500))); // m1 hm
+            spikes.Add(new Spike(new Vector2(645, 480), new Vector2(650, 500), new Vector2(640, 500))); // m1 hr
+            spikes.Add(new Spike(new Vector2(795, 360), new Vector2(800, 380), new Vector2(790, 380))); // m2 vr1
+            spikes.Add(new Spike(new Vector2(785, 300), new Vector2(790, 320), new Vector2(780, 320))); // m2 vl1
+            spikes.Add(new Spike(new Vector2(795, 240), new Vector2(800, 260), new Vector2(790, 260))); // m2 vr2
+            spikes.Add(new Spike(new Vector2(495, 130), new Vector2(500, 150), new Vector2(490, 150))); // m3 hr
+            spikes.Add(new Spike(new Vector2(425, 130), new Vector2(430, 150), new Vector2(420, 150))); // m3 hl
+            spikes.Add(new Spike(new Vector2(260, 180), new Vector2(265, 200), new Vector2(255, 200))); // p3 t
+            spikes.Add(new Spike(new Vector2(225, 200), new Vector2(225, 210), new Vector2(205, 205))); // p3 l
+            spikes.Add(new Spike(new Vector2(265, 200), new Vector2(285, 205), new Vector2(265, 210))); // p3 r
+            spikes.Add(new Spike(new Vector2(285, 225), new Vector2(285, 235), new Vector2(265, 230))); // p4 l
+            spikes.Add(new Spike(new Vector2(165, 240), new Vector2(160, 260), new Vector2(170, 260))); // m4 l
+            spikes.Add(new Spike(new Vector2(10, 180), new Vector2(20, 220), new Vector2(0, 220))); // p5 l
+            spikes.Add(new Spike(new Vector2(30, 180), new Vector2(40, 220), new Vector2(20, 220))); // p5 r
+            spikes.Add(new Spike(new Vector2(5, 130), new Vector2(10, 150), new Vector2(0, 150))); // m5 l
+            spikes.Add(new Spike(new Vector2(115, 60), new Vector2(120, 80), new Vector2(110, 80))); // p6
         }
 
         void LevelTen(List<Spike> spikes, List<MovingPlatform> movingPlatforms)
