@@ -142,7 +142,7 @@ namespace MohawkGame2D
             isUsingDetect = player.isDetect;
             if (isUsingDetect)
             {
-                MovingPlatformEdges(movingPlatforms);
+                DetectAbility(movingPlatforms);
             }
             #endregion
 
@@ -216,9 +216,10 @@ namespace MohawkGame2D
 
         }
 
-        void MovingPlatformEdges(List<MovingPlatform> movingPlatforms)
+        void DetectAbility(List<MovingPlatform> movingPlatforms)
         {
-            
+
+            #region Moving platform edges
             foreach (MovingPlatform movingPlatform in movingPlatforms)
             {
                 Draw.LineSize = 1;
@@ -243,6 +244,9 @@ namespace MohawkGame2D
                     Draw.Line(movingPlatform.endPos, new Vector2(movingPlatform.endPos.X, movingPlatform.endPos.Y - movingPlatform.size.Y));
                 }
             }
+            #endregion
+
+
         }
 
         void CHEAT()

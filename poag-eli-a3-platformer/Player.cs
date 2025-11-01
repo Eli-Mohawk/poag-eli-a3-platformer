@@ -190,7 +190,7 @@ namespace MohawkGame2D
             // left
             if (position.X <= 0)
             {
-                if (gameLevel == 7 && position.Y <= 400 && position.Y >= 200)
+                if (gameLevel == 7 && position.Y <= 150 && position.Y >= 130) // level 0
                 {
                     gameLevel = 0;
                     position = startPosition;
