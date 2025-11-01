@@ -11,12 +11,14 @@ namespace MohawkGame2D
     {
         public Vector2 position;
         public Vector2 size;
+        public Color color;
 
         // makes the platform list work
-        public Platform(Vector2 position, Vector2 size)
+        public Platform(Vector2 position, Vector2 size, Color color)
         {
             this.position = position;
             this.size = size;
+            this.color = color;
         }
 
         public void Setup()
@@ -32,7 +34,7 @@ namespace MohawkGame2D
         void DrawPlatform()
         {
             Draw.LineSize = 3;
-            Draw.LineColor = Color.Blue;
+            Draw.LineColor = color;
             Draw.FillColor = Color.Clear;
             Draw.Rectangle(position, size);
         }

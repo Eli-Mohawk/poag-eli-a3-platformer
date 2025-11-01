@@ -193,7 +193,7 @@ namespace MohawkGame2D
                 if (gameLevel == 7 && position.Y <= 150 && position.Y >= 130) // level 0
                 {
                     gameLevel = 0;
-                    position = startPosition;
+                    position = new Vector2(770, 535);
                     velocity.X = 0;
                 }
                 else

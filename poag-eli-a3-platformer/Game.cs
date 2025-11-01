@@ -50,8 +50,6 @@ namespace MohawkGame2D
 
         Level levels = new Level(1);
 
-        Items heartItem = new Items();
-
         public void Setup()
         {
             Window.SetSize(800, 600);
@@ -142,7 +140,7 @@ namespace MohawkGame2D
             isUsingDetect = player.isDetect;
             if (isUsingDetect)
             {
-                DetectAbility(movingPlatforms);
+                DetectAbility(platforms, movingPlatforms);
             }
             #endregion
 
@@ -216,14 +214,14 @@ namespace MohawkGame2D
 
         }
 
-        void DetectAbility(List<MovingPlatform> movingPlatforms)
+        void DetectAbility(List<Platform> platforms, List<MovingPlatform> movingPlatforms)
         {
+            Draw.LineSize = 1;
+            Draw.LineColor = Color.Green;
 
             #region Moving platform edges
             foreach (MovingPlatform movingPlatform in movingPlatforms)
             {
-                Draw.LineSize = 1;
-                Draw.LineColor = Color.Green;
 
                 if (movingPlatform.moveSpeed.Y > 0 && movingPlatform.moveSpeed.X == 0)
                 {
@@ -246,7 +244,18 @@ namespace MohawkGame2D
             }
             #endregion
 
-
+            #region level 0 platforms
+            if (levelTracker == 0)
+            {
+                foreach (Platform platform in platforms)
+                {
+                    if (platform.color == Color.Clear)
+                    {
+                        Draw.Rectangle(platform.position, platform.size);
+                    }
+                }
+            }
+            #endregion
         }
 
         void CHEAT()
