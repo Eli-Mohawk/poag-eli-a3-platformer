@@ -16,30 +16,25 @@ namespace MohawkGame2D
 
         public Vector2 startPosition = new Vector2(295, 525);
         public Vector2 position;
-        public Vector2 size = new Vector2(10, 20);
+        Vector2 size = new Vector2(10, 20);
 
         public Vector2 velocity = new Vector2(0, 0);
         float gravity;
-        public bool isPlayerGrounded = false;
+        bool isPlayerGrounded;
 
         public int gameLevel = 1;
 
         public bool isDetect;
 
-        public bool isPlayerDead;
-        public bool isPlayerAscended;
-        public bool isPlayerDescending;
-        public bool isSecondChance;
+        public bool isPlayerDead; // game over
+        public bool isPlayerAscended; // fake win
+        public bool isPlayerDescending; // fake win cutscene
+        public bool isTrueEnd; // true win
 
-        bool isHiddenDone;
-        public bool isTrueEnd;
+        public bool isSecondChance; // has player fake won
+        bool isHiddenDone; // has player unlocked real win
 
         int lives = 5;
-
-        public void Setup()
-        {
-
-        }
 
         public void Update(List<Platform> platforms, List<Spike> spikes, List<MovingPlatform> movingPlatforms)
         {
@@ -64,6 +59,7 @@ namespace MohawkGame2D
             Text.Size = 17;
             Text.Color = Color.White;
             Text.Draw($"{lives}", new Vector2(position.X, position.Y - 20));
+
             // player color changes based on health
             Color[] healthColor = new Color[]
             {
@@ -73,6 +69,7 @@ namespace MohawkGame2D
                 new Color(245, 137, 0),
                 new Color(255, 0, 0),
             };
+
             if (lives >= 5)
             {
                 Draw.LineColor = healthColor[0];
@@ -123,6 +120,7 @@ namespace MohawkGame2D
                     velocity.X = 0;
                 }
             }
+
             foreach (MovingPlatform movingPlatform in movingPlatforms)
             {
                 if (CollisionDetection.CheckCollision(position, size, movingPlatform.position, movingPlatform.size))
@@ -162,6 +160,7 @@ namespace MohawkGame2D
                     }
                 }
             }
+
             foreach (MovingPlatform movingPlatform in movingPlatforms)
             {
                 if (CollisionDetection.CheckCollision(position, size, movingPlatform.position, movingPlatform.size))
@@ -191,17 +190,16 @@ namespace MohawkGame2D
                 {
                     if (gameLevel == 0)
                     {
-                        //isPlayerDead = true;
+                        isPlayerDead = true;
                     }
                     lives -= 1;
                     position = startPosition;
                     velocity = new Vector2(0, 0);
-                    break;
                 }
             }
             #endregion
 
-            #region Edge collision & level changing
+            #region left/right screen collision
             // left
             if (position.X <= 0)
             {
@@ -211,18 +209,21 @@ namespace MohawkGame2D
                     position = new Vector2(770, 535);
                     velocity.X = 0;
                 }
-                else
+                else // level 1+
                 {
                     position.X = 0;
                     velocity.X = 0;
                 }
             }
-            // right edge
+            // right
             if (position.X + size.X > Window.Width)
             {
                 position.X = Window.Width - size.X;
                 velocity.X = 0;
             }
+            #endregion
+
+            #region bottom collision / level undo
             // bottom
             if (position.Y + size.Y >= Window.Height)
             {
@@ -233,12 +234,13 @@ namespace MohawkGame2D
                     position = startPosition;
                     velocity.Y = 0;
                 }
+
                 // lose a life
                 else
                 {
                     if (gameLevel == 0)
                     {
-                        //isPlayerDead = true;
+                        isPlayerDead = true;
                     }
                     else
                     {
@@ -248,8 +250,10 @@ namespace MohawkGame2D
                     }
                 }
             }
+            #endregion
+
+            #region top collision / next level
             // top
-            // next level
             if (position.Y + size.Y <= 0)
             {
                 if (gameLevel == 0)
@@ -265,12 +269,12 @@ namespace MohawkGame2D
                 }
             }
 
-            // win the game
+            // fake win
             if (gameLevel > 10 && !isHiddenDone)
             {
                 isPlayerAscended = true;
 
-                if (isPlayerAscended && isSecondChance)
+                if (isPlayerAscended && isSecondChance) // fake win 2
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("ERROR 672: PLAYER FAILED TO FIND AND COMPLETE LEVEL 0");
@@ -279,6 +283,8 @@ namespace MohawkGame2D
                     Environment.Exit(0);
                 }
             }
+
+            // win
             if (gameLevel > 10 && isHiddenDone)
             {
                 isTrueEnd = true;
@@ -292,26 +298,33 @@ namespace MohawkGame2D
             velocity.Y += gravity;
             position += velocity;
 
+            // moves player to top middle of level 10
             if (gameLevel == 10 && position.X != 300)
             {
                 velocity.Y = 0;
                 position.Y = 0;
                 position.X = 300;
             }
+
+            // moves player to the top of each level as they fall
             if (position.Y < 0)
             {
                 velocity.Y = 0;
                 position.Y = 0;
             }
+
+            // reduces level as the player falss
             if (position.Y >= Window.Height)
             {
                 gameLevel -= 1;
                 velocity.Y = 0;
                 position.Y = 0;
             }
+
+            // re-enables normal physics / disables "cutscene"
             if (gameLevel == 1 && position.Y >= 500)
             {
-                lives = 3;
+                lives = 5;
                 isPlayerDescending = false;
                 isSecondChance = true;
             }
@@ -323,7 +336,7 @@ namespace MohawkGame2D
 
             bool isPlayerMovingLeft = Input.IsKeyboardKeyDown(KeyboardInput.A) || Input.IsKeyboardKeyDown(KeyboardInput.Left);
             bool isPlayerMovingRight = Input.IsKeyboardKeyDown(KeyboardInput.D) || Input.IsKeyboardKeyDown(KeyboardInput.Right);
-            bool movingX = false;
+            bool isPlayerMoving = false;
 
             isDetect = Input.IsKeyboardKeyDown(KeyboardInput.Space);
 
@@ -338,28 +351,30 @@ namespace MohawkGame2D
                 // move left
                 if (isPlayerMovingLeft)
                 {
-                    movingX = true;
+                    isPlayerMoving = true;
                     velocity.X = -4;
                 }
 
                 // move right
                 if (isPlayerMovingRight)
                 {
-                    movingX = true;
+                    isPlayerMoving = true;
                     velocity.X = 4;
                 }
 
                 // stop with both
                 if (isPlayerMovingLeft && isPlayerMovingRight)
                 {
-                    movingX = false;
+                    isPlayerMoving = false;
                 }
 
-                if (!movingX)
+                // stop moving when you let go
+                if (!isPlayerMoving)
                 {
                     velocity.X = 0;
                 }
             }
+            // stop inputs when using detect
             else
             {
                 velocity.X = 0;

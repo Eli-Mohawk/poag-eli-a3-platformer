@@ -21,11 +21,6 @@ namespace MohawkGame2D
             this.color = color;
         }
 
-        public void Setup()
-        {
-
-        }
-
         public void Update()
         {
             DrawPlatform();

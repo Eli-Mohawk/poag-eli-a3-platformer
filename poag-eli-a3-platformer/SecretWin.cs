@@ -12,11 +12,6 @@ namespace MohawkGame2D
         float secretWinTimer = 0;
         float secretWinDuration = 5;
 
-        public void Setup()
-        {
-
-        }
-
         public void Update()
         {
             DrawSecretWinScreen();
@@ -30,11 +25,13 @@ namespace MohawkGame2D
 
         void DrawSecretWinScreen()
         {
+            // background
             Draw.LineSize = 5;
             Draw.LineColor = Color.Magenta;
             Draw.FillColor = Color.Black;
             Draw.Rectangle(new Vector2(0, 0), new Vector2(Window.Width, Window.Height));
 
+            // text
             Text.Size = 70;
             Text.Color = Color.Magenta;
             Text.Draw("TRUE ENDING", new Vector2(190, 20));

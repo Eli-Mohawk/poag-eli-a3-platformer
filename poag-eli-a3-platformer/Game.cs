@@ -9,6 +9,7 @@ namespace MohawkGame2D
     public class Game
     {
         bool isGameStarted = false;
+
         bool isUsingDetect;
 
         public int levelTracker = 0;
@@ -54,7 +55,7 @@ namespace MohawkGame2D
                 return;
             }
 
-            // victory screen
+            // fake win screens
             if (player.isPlayerAscended)
             {
                 gameWon.Update();
@@ -67,6 +68,7 @@ namespace MohawkGame2D
                 return;
             }
 
+            // win screen
             if (player.isTrueEnd)
             {
                 secretWin.Update();
@@ -117,8 +119,6 @@ namespace MohawkGame2D
                 DetectAbility(platforms, spikes, movingPlatforms);
             }
             #endregion
-
-            //heartItem.Update();
 
             CHEAT();
         }

@@ -14,12 +14,7 @@ namespace MohawkGame2D
         float gameWonDurationTip = 3;
         float gameWonDurationFull = 5;
 
-        public bool isGoingToCry = false;
-
-        public void Setup()
-        {
-
-        }
+        public bool isGoingToCry = false; // starts fake win cutscene
 
         public void Update()
         {
@@ -30,17 +25,20 @@ namespace MohawkGame2D
 
         void DrawGameWinScreen()
         {
+            // background
             Draw.LineSize = 5;
             Draw.LineColor = Color.Yellow;
             Draw.FillColor = Color.Black;
             Draw.Rectangle(new Vector2(0, 0), new Vector2(Window.Width, Window.Height));
 
+            // main text
             Text.Size = 70;
             Text.Color = Color.Yellow;
             Text.Draw("CONGRATULATIONS!", new Vector2(105, 20));
             Text.Size = 50;
             Text.Draw("YOU WON!", new Vector2(297.5f, 90));
 
+            // delayed text
             Text.Size = 30;
             Text.Color = Color.Red;
             if (gameWonTimer >= gameWonDurationJoke)
@@ -51,6 +49,8 @@ namespace MohawkGame2D
             {
                 Text.Draw("This time, finish EVERY level.", new Vector2(162.5f, 340));
             }
+
+            // starts the cutscene
             if (gameWonTimer >= gameWonDurationFull)
             {
                 isGoingToCry = true;

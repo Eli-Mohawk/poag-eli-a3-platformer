@@ -21,7 +21,6 @@ namespace MohawkGame2D
         bool isMovingRight;
         bool isMovingDown;
 
-        Vector2 previousPosition;
         public Vector2 distance { get; private set; }
 
         public MovingPlatform(Vector2 position, Vector2 size, Vector2 startPos, Vector2 endPos, Vector2 moveSpeed)
@@ -31,17 +30,6 @@ namespace MohawkGame2D
             this.startPos = startPos;
             this.endPos = endPos;
             this.moveSpeed = moveSpeed;
-
-            isMovingRight = true;
-            isMovingDown = false;
-
-            previousPosition = position;
-            distance = new Vector2(0, 0);
-        }
-
-        public void Setup()
-        {
-
         }
 
         public void Update()
@@ -104,7 +92,6 @@ namespace MohawkGame2D
             }
 
             distance = position - pastPosition;
-            previousPosition = position;
         }
 
         void DrawPlatform()

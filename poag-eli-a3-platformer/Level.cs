@@ -15,15 +15,14 @@ namespace MohawkGame2D
         Vector2 startPosition = new Vector2(260, 550);
         Vector2 startSize = new Vector2(90, 20);
 
-        // what the numbers mean-
-        // platforms.Add(new Platform(position, size));
-        // movingPlatforms.Add(new MovingPlatform(position, size, left edge, right edge, speed));
-        // spikes.Add(new Spike(top position, right position, left position));
-
+        // platforms = position, size
+        // movingPlatforms = position, size, max left, max right, speed
+        // spikes = top position, right position, left position
 
         #region Level titles
         public String[] levelNames;
-        String levelZero = "Level !&#: #!@*(^#&^$%@#";
+
+        String levelZero = "&%@!^ &: #!@*^ #&$%"; // Level 0: Total Void
         String levelOne = "Level 1: The Base";
         String levelTwo = "Level 2: First Hurdle";
         String levelThree = "Level 3: The Pillars";
@@ -55,6 +54,7 @@ namespace MohawkGame2D
 
         void Levels(List<Platform> platforms, List<Spike> spikes, List<MovingPlatform> movingPlatforms)
         {
+            // start platfoem
             if (currentLevel < 10 && currentLevel > 0)
             {
                 platforms.Add(new Platform(startPosition, startSize, Color.Blue));
