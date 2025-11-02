@@ -168,7 +168,6 @@ namespace MohawkGame2D
             Text.Draw("- A/Left: Move Left", new Vector2(xPosition[0], 175));
             Text.Draw("- D/Right: Move Right", new Vector2(xPosition[0], 195));
             Text.Draw("- Space: Detect Ability", new Vector2(xPosition[0], 215));
-            Text.Draw("- I: Info Screen", new Vector2(xPosition[0], 235));
 
             Text.Draw("- Make your way up the", new Vector2(xPosition[1], 155));
             Text.Draw("mountian. If you fall", new Vector2(xPosition[1], 175));
