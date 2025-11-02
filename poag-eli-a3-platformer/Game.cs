@@ -119,8 +119,6 @@ namespace MohawkGame2D
                 DetectAbility(platforms, spikes, movingPlatforms);
             }
             #endregion
-
-            CHEAT();
         }
 
         void DrawLevelTitle()
@@ -239,14 +237,6 @@ namespace MohawkGame2D
                 }
             }
             #endregion
-        }
-
-        void CHEAT()
-        {
-            if (Input.IsKeyboardKeyPressed(KeyboardInput.L) && player.gameLevel == 1)
-            {
-                isGameStarted = false;
-            }
         }
     }
 }

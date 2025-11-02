@@ -49,8 +49,6 @@ namespace MohawkGame2D
             }
             DrawPlayer();
             LifeSystem();
-
-            CHEATS();
         }
 
         void DrawPlayer()
@@ -386,103 +384,6 @@ namespace MohawkGame2D
             if (lives <= 0)
             {
                 isPlayerDead = true;
-            }
-        }
-
-        void CHEATS()
-        {
-            #region Flight
-            if (Input.IsKeyboardKeyPressed(KeyboardInput.H))
-            {
-                isFlyCheat = true;
-            }
-            if (isFlyCheat && Input.IsKeyboardKeyPressed(KeyboardInput.J))
-            {
-                isFlyCheat = false;
-                gravity = 0.6f;
-            }
-            if (isFlyCheat)
-            {
-                isPlayerGrounded = false;
-                gravity = 0.0f;
-                if (Input.IsKeyboardKeyDown(KeyboardInput.S))
-                {
-                    velocity.Y = 10;
-                }
-                else if (Input.IsKeyboardKeyReleased(KeyboardInput.S))
-                {
-                    velocity.Y = 0;
-                }
-
-                if (Input.IsKeyboardKeyDown(KeyboardInput.W))
-                {
-                    velocity.Y = -10;
-                }
-                else if (Input.IsKeyboardKeyReleased(KeyboardInput.W))
-                {
-                    velocity.Y = 0;
-                }
-
-                if (Input.IsKeyboardKeyDown(KeyboardInput.A))
-                {
-                    velocity.X = -10;
-                }
-                else if (Input.IsKeyboardKeyReleased(KeyboardInput.A))
-                {
-                    velocity.X = 0;
-                }
-
-                if (Input.IsKeyboardKeyDown(KeyboardInput.D))
-                {
-                    velocity.X = 10;
-                }
-                else if (Input.IsKeyboardKeyReleased(KeyboardInput.D))
-                {
-                    velocity.X = 0;
-                }
-            }
-            #endregion
-
-            if (Input.IsKeyboardKeyPressed(KeyboardInput.S) && !isFlyCheat) // inf air jump
-            {
-                velocity.Y = -10;
-            }
-
-            if (Input.IsKeyboardKeyPressed(KeyboardInput.L)) // go back a level
-            {
-                if (gameLevel > 1)
-                {
-                    gameLevel -= 1;
-                }
-            }
-
-            if (Input.IsKeyboardKeyPressed(KeyboardInput.K)) // skip a level
-            {
-                if (gameLevel < 10)
-                {
-                    gameLevel += 1;
-                }
-            }
-
-            if (Input.IsKeyboardKeyPressed(KeyboardInput.U)) // go to level 0
-            {
-                gameLevel = 0;
-                position = new Vector2(750, 500);
-            }
-
-            if (Input.IsKeyboardKeyPressed(KeyboardInput.Y)) // give lives
-            {
-                lives += 10;
-            }
-
-            if (Input.IsKeyboardKeyPressed(KeyboardInput.P)) // fake win
-            {
-                isPlayerAscended = true;
-            }
-
-            if (Input.IsKeyboardKeyPressed(KeyboardInput.O)) // true win
-            {
-                isTrueEnd = true;
             }
         }
     }
