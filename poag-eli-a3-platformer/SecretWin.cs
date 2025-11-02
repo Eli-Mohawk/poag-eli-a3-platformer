@@ -9,7 +9,6 @@ namespace MohawkGame2D
 {
     public class SecretWin
     {
-        // makes the game over screen display for a set amount of time
         float secretWinTimer = 0;
         float secretWinDuration = 5;
 
@@ -22,7 +21,6 @@ namespace MohawkGame2D
         {
             DrawSecretWinScreen();
 
-            // closes the game when the timer gets to the duration
             secretWinTimer += Time.DeltaTime;
             if (secretWinTimer >= secretWinDuration)
             {
@@ -33,14 +31,15 @@ namespace MohawkGame2D
         void DrawSecretWinScreen()
         {
             Draw.LineSize = 5;
-            Draw.LineColor = Color.Red;
+            Draw.LineColor = Color.Magenta;
             Draw.FillColor = Color.Black;
             Draw.Rectangle(new Vector2(0, 0), new Vector2(Window.Width, Window.Height));
 
             Text.Size = 70;
-            Text.Color = Color.Green;
-            Text.Draw("TRUE  ENDING", new Vector2(217.5f, 20));
+            Text.Color = Color.Magenta;
+            Text.Draw("TRUE ENDING", new Vector2(190, 20));
+            Text.Size = 50;
+            Text.Draw("GOOD JOB!", new Vector2(282.5f, 90));
         }
     }
-
 }

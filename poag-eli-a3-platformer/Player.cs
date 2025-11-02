@@ -34,7 +34,7 @@ namespace MohawkGame2D
         bool isHiddenDone;
         public bool isTrueEnd;
 
-        int lives = 3;
+        int lives = 5;
 
         public void Setup()
         {
@@ -67,22 +67,33 @@ namespace MohawkGame2D
             // player color changes based on health
             Color[] healthColor = new Color[]
             {
-                 new Color(255, 255, 0),
-                 new Color(245, 137, 0),
-                 new Color(255, 0, 0),
+                new Color(165, 48, 219),
+                new Color(48, 219, 57),
+                new Color(255, 255, 0),
+                new Color(245, 137, 0),
+                new Color(255, 0, 0),
             };
-            if (lives >= 3)
+            if (lives >= 5)
             {
                 Draw.LineColor = healthColor[0];
             }
-            else if (lives == 2)
+            else if (lives == 4)
             {
                 Draw.LineColor = healthColor[1];
             }
+            else if (lives == 3)
+            {
+                Draw.LineColor = healthColor[2];
+            }
+            else if (lives == 2)
+            {
+                Draw.LineColor = healthColor[3];
+            }
             else if (lives == 1)
             {
-                Draw.LineColor= healthColor[2];
+                Draw.LineColor = healthColor[4];
             }
+            
             // player
             Draw.LineSize = 3;
             Draw.FillColor = Color.Clear;
@@ -180,7 +191,7 @@ namespace MohawkGame2D
                 {
                     if (gameLevel == 0)
                     {
-                        isPlayerDead = true;
+                        //isPlayerDead = true;
                     }
                     lives -= 1;
                     position = startPosition;
@@ -227,7 +238,7 @@ namespace MohawkGame2D
                 {
                     if (gameLevel == 0)
                     {
-                        lives -= 10;
+                        //isPlayerDead = true;
                     }
                     else
                     {
@@ -417,12 +428,12 @@ namespace MohawkGame2D
             }
             #endregion
 
-            if (Input.IsKeyboardKeyPressed(KeyboardInput.S) && !isFlyCheat)
+            if (Input.IsKeyboardKeyPressed(KeyboardInput.S) && !isFlyCheat) // inf air jump
             {
                 velocity.Y = -10;
             }
 
-            if (Input.IsKeyboardKeyPressed(KeyboardInput.L))
+            if (Input.IsKeyboardKeyPressed(KeyboardInput.L)) // go back a level
             {
                 if (gameLevel > 1)
                 {
@@ -430,7 +441,7 @@ namespace MohawkGame2D
                 }
             }
 
-            if (Input.IsKeyboardKeyPressed(KeyboardInput.K))
+            if (Input.IsKeyboardKeyPressed(KeyboardInput.K)) // skip a level
             {
                 if (gameLevel < 10)
                 {
@@ -438,15 +449,25 @@ namespace MohawkGame2D
                 }
             }
 
-            if (Input.IsKeyboardKeyPressed(KeyboardInput.U))
+            if (Input.IsKeyboardKeyPressed(KeyboardInput.U)) // go to level 0
             {
                 gameLevel = 0;
                 position = new Vector2(750, 500);
             }
 
-            if (Input.IsKeyboardKeyPressed(KeyboardInput.Y))
+            if (Input.IsKeyboardKeyPressed(KeyboardInput.Y)) // give lives
             {
                 lives += 10;
+            }
+
+            if (Input.IsKeyboardKeyPressed(KeyboardInput.P)) // fake win
+            {
+                isPlayerAscended = true;
+            }
+
+            if (Input.IsKeyboardKeyPressed(KeyboardInput.O)) // true win
+            {
+                isTrueEnd = true;
             }
         }
     }

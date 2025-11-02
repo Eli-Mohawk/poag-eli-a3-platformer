@@ -132,9 +132,22 @@ namespace MohawkGame2D
 
             platforms.Add(new Platform(new Vector2(545, 505), new Vector2(60, 20), Color.Clear));
             platforms.Add(new Platform(new Vector2(400, 470), new Vector2(40, 20), Color.Clear));
-            platforms.Add(new Platform(new Vector2(480, 400), new Vector2(30, 20), Color.Clear));
+            platforms.Add(new Platform(new Vector2(510, 400), new Vector2(30, 20), Color.Clear));
+            platforms.Add(new Platform(new Vector2(590, 360), new Vector2(15, 10), Color.Clear));
+            platforms.Add(new Platform(new Vector2(705, 310), new Vector2(35, 20), Color.Clear));
+            platforms.Add(new Platform(new Vector2(550, 265), new Vector2(60, 20), Color.Clear));
+            platforms.Add(new Platform(new Vector2(415, 205), new Vector2(40, 20), Color.Clear));
+            platforms.Add(new Platform(new Vector2(265, 170), new Vector2(50, 20), Color.Clear));
+            platforms.Add(new Platform(new Vector2(110, 125), new Vector2(50, 20), Color.Clear));
+            platforms.Add(new Platform(new Vector2(200, 50), new Vector2(80, 20), Color.Clear));
 
-            spikes.Add(new Spike(new Vector2(505, 380), new Vector2(510, 400), new Vector2(500, 400), Color.Clear));
+            spikes.Add(new Spike(new Vector2(405, 450), new Vector2(410, 470), new Vector2(400, 470), Color.Clear));
+            spikes.Add(new Spike(new Vector2(535, 380), new Vector2(540, 400), new Vector2(530, 400), Color.Clear));
+            spikes.Add(new Spike(new Vector2(735, 290), new Vector2(740, 310), new Vector2(730, 310), Color.Clear));
+            spikes.Add(new Spike(new Vector2(580, 245), new Vector2(585, 265), new Vector2(575, 265), Color.Clear));
+            spikes.Add(new Spike(new Vector2(435, 185), new Vector2(440, 205), new Vector2(430, 205), Color.Clear));
+            spikes.Add(new Spike(new Vector2(290, 150), new Vector2(295, 170), new Vector2(285, 170), Color.Clear));
+            spikes.Add(new Spike(new Vector2(135, 105), new Vector2(140, 125), new Vector2(130, 125), Color.Clear));
         }
 
         void LevelOne(List<Platform> platforms, List<Spike> spikes)

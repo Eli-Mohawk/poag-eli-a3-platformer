@@ -10,8 +10,9 @@ namespace MohawkGame2D
     public class GameWon
     {
         float gameWonTimer = 0;
-        float gameWonDuration = 2;
-        float gameWonDurationFull = 4;
+        float gameWonDurationJoke = 2;
+        float gameWonDurationTip = 3;
+        float gameWonDurationFull = 5;
 
         public bool isGoingToCry = false;
 
@@ -25,26 +26,30 @@ namespace MohawkGame2D
             DrawGameWinScreen();
 
             gameWonTimer += Time.DeltaTime;
-            DrawGameWinScreenTimed();
         }
 
         void DrawGameWinScreen()
         {
-            Draw.LineSize = 0;
+            Draw.LineSize = 5;
+            Draw.LineColor = Color.Yellow;
             Draw.FillColor = Color.Black;
             Draw.Rectangle(new Vector2(0, 0), new Vector2(Window.Width, Window.Height));
 
-            Text.Size = 50;
+            Text.Size = 70;
             Text.Color = Color.Yellow;
-            Text.Draw("CONGRATULATIONS!", new Vector2(250, 100));
-            Text.Draw("YOU WON!", new Vector2(130, 200));
-        }
+            Text.Draw("CONGRATULATIONS!", new Vector2(105, 20));
+            Text.Size = 50;
+            Text.Draw("YOU WON!", new Vector2(297.5f, 90));
 
-        void DrawGameWinScreenTimed()
-        {
-            if (gameWonTimer >= gameWonDuration)
+            Text.Size = 30;
+            Text.Color = Color.Red;
+            if (gameWonTimer >= gameWonDurationJoke)
             {
-                Text.Draw("TEST", new Vector2(350, 300));
+                Text.Draw("Just Kidding!", new Vector2(297.5f, 300));
+            }
+            if (gameWonTimer >= gameWonDurationTip)
+            {
+                Text.Draw("This time, finish EVERY level.", new Vector2(162.5f, 340));
             }
             if (gameWonTimer >= gameWonDurationFull)
             {

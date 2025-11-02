@@ -1,26 +1,4 @@
-﻿/// TO-DO List
-/// 
-/// Title / readme:
-/// add info button to title
-/// in info screen add return screen that takes you back to title (info code over title then bool)
-/// talk about object types (plat, spike, moveplat)
-/// talk about detect
-/// 
-/// game won screen:
-/// tell the player that there is a real win (secret level)
-/// 
-/// levels:
-/// add platforms to level 7-10
-/// playtest whole game
-/// add level 0
-/// remove leveltest
-/// 
-/// general:
-/// FINAL CODE CLEAN
-/// add info the readme (similar but more stuff than title)
-/// remove cheat abilities for main branch (game.cs title screen void / game.cs cheat void / player.cs cheat void / player.cs main bool)
-
-using Raylib_cs;
+﻿using Raylib_cs;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
@@ -33,9 +11,6 @@ namespace MohawkGame2D
         bool isGameStarted = false;
         bool isUsingDetect;
 
-        bool isCleared = false;
-        bool isDrawn = false;
-        
         public int levelTracker = 0;
 
         Player player = new Player();
@@ -68,7 +43,6 @@ namespace MohawkGame2D
             // title screen
             if (!isGameStarted)
             {
-                Window.ClearBackground(Color.Black);
                 DrawTitleScreen();
                 return;
             }
@@ -156,6 +130,9 @@ namespace MohawkGame2D
 
         void DrawTitleScreen()
         {
+            Draw.FillColor = Color.Black;
+            Draw.Rectangle(new Vector2(0, 0), new Vector2(Window.Width, Window.Height));
+
             // array for title colors
             Color[] titleScreenColors = new Color[]
             {
@@ -192,6 +169,8 @@ namespace MohawkGame2D
             Text.Draw("- W/Up: Jump", new Vector2(xPosition[0], 155));
             Text.Draw("- A/Left: Move Left", new Vector2(xPosition[0], 175));
             Text.Draw("- D/Right: Move Right", new Vector2(xPosition[0], 195));
+            Text.Draw("- Space: Detect Ability", new Vector2(xPosition[0], 215));
+            Text.Draw("- I: Info Screen", new Vector2(xPosition[0], 235));
 
             Text.Draw("- Make your way up the", new Vector2(xPosition[1], 155));
             Text.Draw("mountian. If you fall", new Vector2(xPosition[1], 175));
@@ -207,11 +186,6 @@ namespace MohawkGame2D
             {
                 isGameStarted = true;
             }
-        }
-
-        void DrawInfoScreen()
-        {
-
         }
 
         void DetectAbility(List<Platform> platforms, List<Spike> spikes, List<MovingPlatform> movingPlatforms)
