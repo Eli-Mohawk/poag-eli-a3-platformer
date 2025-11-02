@@ -10,15 +10,17 @@ namespace MohawkGame2D
 {
     public class Spike
     {
-        Vector2 top;
-        Vector2 right;
-        Vector2 left;
+        public Vector2 top;
+        public Vector2 right;
+        public Vector2 left;
+        public Color color;
 
-        public Spike(Vector2 top, Vector2 right, Vector2 left)
+        public Spike(Vector2 top, Vector2 right, Vector2 left, Color color)
         {
             this.top = top;
             this.right = right;
             this.left = left;
+            this.color = color;
         }
 
         public void Setup()
@@ -34,7 +36,7 @@ namespace MohawkGame2D
         void DrawSpike()
         {
             Draw.LineSize = 2;
-            Draw.LineColor = Color.Red;
+            Draw.LineColor = color;
             Draw.FillColor = Color.Clear;
             Draw.Triangle(top, right, left);
         }

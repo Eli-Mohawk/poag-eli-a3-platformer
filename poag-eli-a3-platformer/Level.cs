@@ -62,7 +62,7 @@ namespace MohawkGame2D
 
             if (currentLevel == 0)
             {
-                LevelZero(platforms);
+                LevelZero(platforms, spikes);
             }
             if (currentLevel == 1)
             {
@@ -90,7 +90,7 @@ namespace MohawkGame2D
             }
             if (currentLevel == 7)
             {
-                LevelSeven(platforms, spikes, movingPlatforms);
+                LevelSeven(platforms, movingPlatforms);
             }
             if (currentLevel == 8)
             {
@@ -116,19 +116,25 @@ namespace MohawkGame2D
             {
                 int spikeGap = spikeCount * 8;
 
-                Spike newSpike = new Spike(new Vector2(top.X + spikeGap, top.Y), new Vector2(right.X + spikeGap, right.Y), new Vector2(left.X + spikeGap, left.Y));
+                Spike newSpike = new Spike(new Vector2(top.X + spikeGap, top.Y), new Vector2(right.X + spikeGap, right.Y), new Vector2(left.X + spikeGap, left.Y), Color.Red);
 
                 spikes.Add(newSpike);
             }
         }
 
         #region Levels
-        void LevelZero(List<Platform> platforms)
+        void LevelZero(List<Platform> platforms, List<Spike> spikes)
         {
             platforms.Add(new Platform(new Vector2(700, 550), new Vector2(100, 20), Color.Blue));
 
-            platforms.Add(new Platform(new Vector2(200, 200), new Vector2(20, 20), Color.Clear));
+            platforms.Add(new Platform(new Vector2(), new Vector2(), Color.Clear));
+            spikes.Add(new Spike(new Vector2(), new Vector2(), new Vector2(), Color.Clear));
 
+            platforms.Add(new Platform(new Vector2(545, 505), new Vector2(60, 20), Color.Clear));
+            platforms.Add(new Platform(new Vector2(400, 470), new Vector2(40, 20), Color.Clear));
+            platforms.Add(new Platform(new Vector2(480, 400), new Vector2(30, 20), Color.Clear));
+
+            spikes.Add(new Spike(new Vector2(505, 380), new Vector2(510, 400), new Vector2(500, 400), Color.Clear));
         }
 
         void LevelOne(List<Platform> platforms, List<Spike> spikes)
@@ -227,28 +233,28 @@ namespace MohawkGame2D
             platforms.Add(new Platform(new Vector2(370, 90), new Vector2(60, 20), Color.Blue));
             platforms.Add(new Platform(new Vector2(510, 70), new Vector2(130, 15), Color.Blue));
 
-            spikes.Add(new Spike(new Vector2(410, 500), new Vector2(410, 510), new Vector2(390, 505))); // p1 L
-            spikes.Add(new Spike(new Vector2(440, 480), new Vector2(445, 500), new Vector2(435, 500))); // p1 T
-            spikes.Add(new Spike(new Vector2(540, 440), new Vector2(540, 450), new Vector2(520, 445))); // p2 L
-            spikes.Add(new Spike(new Vector2(545, 470), new Vector2(550, 450), new Vector2(540, 450))); // p2 B
-            spikes.Add(new Spike(new Vector2(550, 440), new Vector2(570, 445), new Vector2(550, 450))); // p2 R
-            spikes.Add(new Spike(new Vector2(675, 375), new Vector2(670, 395), new Vector2(680, 395))); // p3 T
-            spikes.Add(new Spike(new Vector2(800, 375), new Vector2(800, 395), new Vector2(760, 385))); // p3 WB
-            spikes.Add(new Spike(new Vector2(800, 355), new Vector2(800, 375), new Vector2(760, 365))); // p3 WT
-            spikes.Add(new Spike(new Vector2(585, 295), new Vector2(590, 275), new Vector2(580, 275))); // p5 B
-            spikes.Add(new Spike(new Vector2(555, 300), new Vector2(560, 320), new Vector2(550, 320))); // p6 T
-            spikes.Add(new Spike(new Vector2(430, 270), new Vector2(450, 275), new Vector2(430, 280))); // p7 R
-            spikes.Add(new Spike(new Vector2(225, 230), new Vector2(230, 250), new Vector2(220, 250))); // p8 TL
-            spikes.Add(new Spike(new Vector2(285, 230), new Vector2(290, 250), new Vector2(280, 250))); // p8 TR
-            spikes.Add(new Spike(new Vector2(50, 140), new Vector2(90, 150), new Vector2(50, 160))); // pW B
-            spikes.Add(new Spike(new Vector2(50, 120), new Vector2(90, 130), new Vector2(50, 140))); // pW BT
-            spikes.Add(new Spike(new Vector2(50, 100), new Vector2(90, 110), new Vector2(50, 120))); // pW MB
-            spikes.Add(new Spike(new Vector2(50, 80), new Vector2(90, 90), new Vector2(50, 100))); // pW M
-            spikes.Add(new Spike(new Vector2(50, 60), new Vector2(90, 70), new Vector2(50, 80))); // pW MT
-            spikes.Add(new Spike(new Vector2(50, 40), new Vector2(90, 50), new Vector2(50, 60))); // pW T
-            spikes.Add(new Spike(new Vector2(240, 63), new Vector2(230, 23), new Vector2(250, 23))); // pB L
-            spikes.Add(new Spike(new Vector2(260, 63), new Vector2(250, 23), new Vector2(270, 23))); // pB R
-            spikes.Add(new Spike(new Vector2(515, 50), new Vector2(520, 70), new Vector2(510, 70))); // p14 L
+            spikes.Add(new Spike(new Vector2(410, 500), new Vector2(410, 510), new Vector2(390, 505), Color.Red)); // p1 L
+            spikes.Add(new Spike(new Vector2(440, 480), new Vector2(445, 500), new Vector2(435, 500), Color.Red)); // p1 T
+            spikes.Add(new Spike(new Vector2(540, 440), new Vector2(540, 450), new Vector2(520, 445), Color.Red)); // p2 L
+            spikes.Add(new Spike(new Vector2(545, 470), new Vector2(550, 450), new Vector2(540, 450), Color.Red)); // p2 B
+            spikes.Add(new Spike(new Vector2(550, 440), new Vector2(570, 445), new Vector2(550, 450), Color.Red)); // p2 R
+            spikes.Add(new Spike(new Vector2(675, 375), new Vector2(670, 395), new Vector2(680, 395), Color.Red)); // p3 T
+            spikes.Add(new Spike(new Vector2(800, 375), new Vector2(800, 395), new Vector2(760, 385), Color.Red)); // p3 WB
+            spikes.Add(new Spike(new Vector2(800, 355), new Vector2(800, 375), new Vector2(760, 365), Color.Red)); // p3 WT
+            spikes.Add(new Spike(new Vector2(585, 295), new Vector2(590, 275), new Vector2(580, 275), Color.Red)); // p5 B
+            spikes.Add(new Spike(new Vector2(555, 300), new Vector2(560, 320), new Vector2(550, 320), Color.Red)); // p6 T
+            spikes.Add(new Spike(new Vector2(430, 270), new Vector2(450, 275), new Vector2(430, 280), Color.Red)); // p7 R
+            spikes.Add(new Spike(new Vector2(225, 230), new Vector2(230, 250), new Vector2(220, 250), Color.Red)); // p8 TL
+            spikes.Add(new Spike(new Vector2(285, 230), new Vector2(290, 250), new Vector2(280, 250), Color.Red)); // p8 TR
+            spikes.Add(new Spike(new Vector2(50, 140), new Vector2(90, 150), new Vector2(50, 160), Color.Red)); // pW B
+            spikes.Add(new Spike(new Vector2(50, 120), new Vector2(90, 130), new Vector2(50, 140), Color.Red)); // pW BT
+            spikes.Add(new Spike(new Vector2(50, 100), new Vector2(90, 110), new Vector2(50, 120), Color.Red)); // pW MB
+            spikes.Add(new Spike(new Vector2(50, 80), new Vector2(90, 90), new Vector2(50, 100), Color.Red)); // pW M
+            spikes.Add(new Spike(new Vector2(50, 60), new Vector2(90, 70), new Vector2(50, 80), Color.Red)); // pW MT
+            spikes.Add(new Spike(new Vector2(50, 40), new Vector2(90, 50), new Vector2(50, 60), Color.Red)); // pW T
+            spikes.Add(new Spike(new Vector2(240, 63), new Vector2(230, 23), new Vector2(250, 23), Color.Red)); // pB L
+            spikes.Add(new Spike(new Vector2(260, 63), new Vector2(250, 23), new Vector2(270, 23), Color.Red)); // pB R
+            spikes.Add(new Spike(new Vector2(515, 50), new Vector2(520, 70), new Vector2(510, 70), Color.Red)); // p14 L
         }
 
         void LevelSix(List<Platform> platforms, List<Spike> spikes)
@@ -266,31 +272,31 @@ namespace MohawkGame2D
             platforms.Add(new Platform(new Vector2(395, 140), new Vector2(80, 10), Color.Blue));
             platforms.Add(new Platform(new Vector2(530, 75), new Vector2(40, 10), Color.Blue));
 
-            spikes.Add(new Spike(new Vector2(445, 470), new Vector2(450, 490), new Vector2(440, 490))); // p1
-            spikes.Add(new Spike(new Vector2(565, 430), new Vector2(570, 450), new Vector2(560, 450))); // p2
-            spikes.Add(new Spike(new Vector2(405, 420), new Vector2(410, 400), new Vector2(400, 400))); // p3 B
-            spikes.Add(new Spike(new Vector2(490, 390), new Vector2(490, 400), new Vector2(510, 395))); // p3 S
-            spikes.Add(new Spike(new Vector2(405, 370), new Vector2(410, 390), new Vector2(400, 390))); // p3 T
-            spikes.Add(new Spike(new Vector2(350, 330), new Vector2(355, 350), new Vector2(345, 350))); // p4
-            spikes.Add(new Spike(new Vector2(155, 445), new Vector2(160, 465), new Vector2(150, 465))); // p5 T L
-            spikes.Add(new Spike(new Vector2(190, 445), new Vector2(185, 465), new Vector2(195, 465))); // p5 T R
-            spikes.Add(new Spike(new Vector2(5, 390), new Vector2(10, 410), new Vector2(0, 410))); // p6 T
-            spikes.Add(new Spike(new Vector2(85, 410), new Vector2(105, 415), new Vector2(85, 420))); // p6 S
-            spikes.Add(new Spike(new Vector2(160, 330), new Vector2(155, 350), new Vector2(165, 350))); // p7 T
-            spikes.Add(new Spike(new Vector2(5, 330), new Vector2(10, 310), new Vector2(0, 310))); // p8 B
-            spikes.Add(new Spike(new Vector2(85, 300), new Vector2(105, 305), new Vector2(85, 310))); // p8 S
-            spikes.Add(new Spike(new Vector2(180, 215), new Vector2(185, 235), new Vector2(175, 235))); // p9 T
-            spikes.Add(new Spike(new Vector2(280, 170), new Vector2(275, 190), new Vector2(285, 190))); // p10 T
-            spikes.Add(new Spike(new Vector2(395, 140), new Vector2(395, 150), new Vector2(375, 145))); // p11 S L
-            spikes.Add(new Spike(new Vector2(475, 140), new Vector2(495, 145), new Vector2(475, 150))); // p11 S R
-            spikes.Add(new Spike(new Vector2(530, 75), new Vector2(530, 85), new Vector2(510, 80))); // p12 S L
-            spikes.Add(new Spike(new Vector2(570, 75), new Vector2(590, 80), new Vector2(570, 85))); // p12 S R
-            spikes.Add(new Spike(new Vector2(540, 125), new Vector2(530, 85), new Vector2(550, 85))); // p12 B L
-            spikes.Add(new Spike(new Vector2(560, 125), new Vector2(550, 85), new Vector2(570, 85))); // p12 B R
-            spikes.Add(new Spike(new Vector2(565, 55), new Vector2(570, 75), new Vector2(560, 75))); // p12 T
+            spikes.Add(new Spike(new Vector2(445, 470), new Vector2(450, 490), new Vector2(440, 490), Color.Red)); // p1
+            spikes.Add(new Spike(new Vector2(565, 430), new Vector2(570, 450), new Vector2(560, 450), Color.Red)); // p2
+            spikes.Add(new Spike(new Vector2(405, 420), new Vector2(410, 400), new Vector2(400, 400), Color.Red)); // p3 B
+            spikes.Add(new Spike(new Vector2(490, 390), new Vector2(490, 400), new Vector2(510, 395), Color.Red)); // p3 S
+            spikes.Add(new Spike(new Vector2(405, 370), new Vector2(410, 390), new Vector2(400, 390), Color.Red)); // p3 T
+            spikes.Add(new Spike(new Vector2(350, 330), new Vector2(355, 350), new Vector2(345, 350), Color.Red)); // p4
+            spikes.Add(new Spike(new Vector2(155, 445), new Vector2(160, 465), new Vector2(150, 465), Color.Red)); // p5 T L
+            spikes.Add(new Spike(new Vector2(190, 445), new Vector2(185, 465), new Vector2(195, 465), Color.Red)); // p5 T R
+            spikes.Add(new Spike(new Vector2(5, 390), new Vector2(10, 410), new Vector2(0, 410), Color.Red)); // p6 T
+            spikes.Add(new Spike(new Vector2(85, 410), new Vector2(105, 415), new Vector2(85, 420), Color.Red)); // p6 S
+            spikes.Add(new Spike(new Vector2(160, 330), new Vector2(155, 350), new Vector2(165, 350), Color.Red)); // p7 T
+            spikes.Add(new Spike(new Vector2(5, 330), new Vector2(10, 310), new Vector2(0, 310), Color.Red)); // p8 B
+            spikes.Add(new Spike(new Vector2(85, 300), new Vector2(105, 305), new Vector2(85, 310), Color.Red)); // p8 S
+            spikes.Add(new Spike(new Vector2(180, 215), new Vector2(185, 235), new Vector2(175, 235), Color.Red)); // p9 T
+            spikes.Add(new Spike(new Vector2(280, 170), new Vector2(275, 190), new Vector2(285, 190), Color.Red)); // p10 T
+            spikes.Add(new Spike(new Vector2(395, 140), new Vector2(395, 150), new Vector2(375, 145), Color.Red)); // p11 S L
+            spikes.Add(new Spike(new Vector2(475, 140), new Vector2(495, 145), new Vector2(475, 150), Color.Red)); // p11 S R
+            spikes.Add(new Spike(new Vector2(530, 75), new Vector2(530, 85), new Vector2(510, 80), Color.Red)); // p12 S L
+            spikes.Add(new Spike(new Vector2(570, 75), new Vector2(590, 80), new Vector2(570, 85), Color.Red)); // p12 S R
+            spikes.Add(new Spike(new Vector2(540, 125), new Vector2(530, 85), new Vector2(550, 85), Color.Red)); // p12 B L
+            spikes.Add(new Spike(new Vector2(560, 125), new Vector2(550, 85), new Vector2(570, 85), Color.Red)); // p12 B R
+            spikes.Add(new Spike(new Vector2(565, 55), new Vector2(570, 75), new Vector2(560, 75), Color.Red)); // p12 T
         }
 
-        void LevelSeven(List<Platform> platforms, List<Spike> spikes, List<MovingPlatform> movingPlatforms)
+        void LevelSeven(List<Platform> platforms, List<MovingPlatform> movingPlatforms)
         {
             platforms.Add(new Platform(new Vector2(670, 450), new Vector2(40, 20), Color.Blue));
             platforms.Add(new Platform(new Vector2(650, 325), new Vector2(60, 20), Color.Blue));
@@ -320,17 +326,17 @@ namespace MohawkGame2D
             movingPlatforms.Add(new MovingPlatform(new Vector2(610, 205), new Vector2(30, 20), new Vector2(610, 205), new Vector2(610, 460), new Vector2(0, 1)));
             movingPlatforms.Add(new MovingPlatform(new Vector2(390, 60), new Vector2(15, 20), new Vector2(390, 60), new Vector2(390, 220), new Vector2(0, 2)));
 
-            spikes.Add(new Spike(new Vector2(15, 360), new Vector2(20, 380), new Vector2(10, 380))); // m1 r1
-            spikes.Add(new Spike(new Vector2(5, 300), new Vector2(10, 320), new Vector2(0, 320))); // m1 l1
-            spikes.Add(new Spike(new Vector2(15, 240), new Vector2(20, 260), new Vector2(10, 260))); // m1 r2
-            spikes.Add(new Spike(new Vector2(5, 180), new Vector2(10, 200), new Vector2(0, 200))); // m1 l2
-            spikes.Add(new Spike(new Vector2(115, 250), new Vector2(120, 270), new Vector2(110, 270))); // p1
-            spikes.Add(new Spike(new Vector2(285, 300), new Vector2(290, 320), new Vector2(280, 320))); // p2
-            spikes.Add(new Spike(new Vector2(415, 450), new Vector2(420, 470), new Vector2(410, 470))); // p3 l
-            spikes.Add(new Spike(new Vector2(475, 450), new Vector2(480, 470), new Vector2(470, 470))); // p3 r
-            spikes.Add(new Spike(new Vector2(630, 420), new Vector2(635, 440), new Vector2(625, 440))); // m2 r1
-            spikes.Add(new Spike(new Vector2(620, 360), new Vector2(625, 380), new Vector2(615, 380))); // m2 l2
-            spikes.Add(new Spike(new Vector2(630, 300), new Vector2(635, 320), new Vector2(625, 320))); // m2 r2
+            spikes.Add(new Spike(new Vector2(15, 360), new Vector2(20, 380), new Vector2(10, 380), Color.Red)); // m1 r1
+            spikes.Add(new Spike(new Vector2(5, 300), new Vector2(10, 320), new Vector2(0, 320), Color.Red)); // m1 l1
+            spikes.Add(new Spike(new Vector2(15, 240), new Vector2(20, 260), new Vector2(10, 260), Color.Red)); // m1 r2
+            spikes.Add(new Spike(new Vector2(5, 180), new Vector2(10, 200), new Vector2(0, 200), Color.Red)); // m1 l2
+            spikes.Add(new Spike(new Vector2(115, 250), new Vector2(120, 270), new Vector2(110, 270), Color.Red)); // p1
+            spikes.Add(new Spike(new Vector2(285, 300), new Vector2(290, 320), new Vector2(280, 320), Color.Red)); // p2
+            spikes.Add(new Spike(new Vector2(415, 450), new Vector2(420, 470), new Vector2(410, 470), Color.Red)); // p3 l
+            spikes.Add(new Spike(new Vector2(475, 450), new Vector2(480, 470), new Vector2(470, 470), Color.Red)); // p3 r
+            spikes.Add(new Spike(new Vector2(630, 420), new Vector2(635, 440), new Vector2(625, 440), Color.Red)); // m2 r1
+            spikes.Add(new Spike(new Vector2(620, 360), new Vector2(625, 380), new Vector2(615, 380), Color.Red)); // m2 l2
+            spikes.Add(new Spike(new Vector2(630, 300), new Vector2(635, 320), new Vector2(625, 320), Color.Red)); // m2 r2
         }
 
         void LevelNine(List<Platform> platforms, List<Spike> spikes, List<MovingPlatform> movingPlatforms)
@@ -349,23 +355,23 @@ namespace MohawkGame2D
             movingPlatforms.Add(new MovingPlatform(new Vector2(160, 260), new Vector2(50, 20), new Vector2(160, 260), new Vector2(370, 260), new Vector2(2, 0)));
             movingPlatforms.Add(new MovingPlatform(new Vector2(0, 100), new Vector2(30, 10), new Vector2(0, 100), new Vector2(0, 165), new Vector2(0, 1)));
 
-            spikes.Add(new Spike(new Vector2(465, 480), new Vector2(470, 500), new Vector2(460, 500))); // m1 hl
-            spikes.Add(new Spike(new Vector2(555, 480), new Vector2(560, 500), new Vector2(550, 500))); // m1 hm
-            spikes.Add(new Spike(new Vector2(645, 480), new Vector2(650, 500), new Vector2(640, 500))); // m1 hr
-            spikes.Add(new Spike(new Vector2(795, 360), new Vector2(800, 380), new Vector2(790, 380))); // m2 vr1
-            spikes.Add(new Spike(new Vector2(785, 300), new Vector2(790, 320), new Vector2(780, 320))); // m2 vl1
-            spikes.Add(new Spike(new Vector2(795, 240), new Vector2(800, 260), new Vector2(790, 260))); // m2 vr2
-            spikes.Add(new Spike(new Vector2(495, 130), new Vector2(500, 150), new Vector2(490, 150))); // m3 hr
-            spikes.Add(new Spike(new Vector2(425, 130), new Vector2(430, 150), new Vector2(420, 150))); // m3 hl
-            spikes.Add(new Spike(new Vector2(260, 180), new Vector2(265, 200), new Vector2(255, 200))); // p3 t
-            spikes.Add(new Spike(new Vector2(225, 200), new Vector2(225, 210), new Vector2(205, 205))); // p3 l
-            spikes.Add(new Spike(new Vector2(265, 200), new Vector2(285, 205), new Vector2(265, 210))); // p3 r
-            spikes.Add(new Spike(new Vector2(285, 225), new Vector2(285, 235), new Vector2(265, 230))); // p4 l
-            spikes.Add(new Spike(new Vector2(165, 240), new Vector2(160, 260), new Vector2(170, 260))); // m4 l
-            spikes.Add(new Spike(new Vector2(10, 180), new Vector2(20, 220), new Vector2(0, 220))); // p5 l
-            spikes.Add(new Spike(new Vector2(30, 180), new Vector2(40, 220), new Vector2(20, 220))); // p5 r
-            spikes.Add(new Spike(new Vector2(5, 130), new Vector2(10, 150), new Vector2(0, 150))); // m5 l
-            spikes.Add(new Spike(new Vector2(115, 60), new Vector2(120, 80), new Vector2(110, 80))); // p6
+            spikes.Add(new Spike(new Vector2(465, 480), new Vector2(470, 500), new Vector2(460, 500), Color.Red)); // m1 hl
+            spikes.Add(new Spike(new Vector2(555, 480), new Vector2(560, 500), new Vector2(550, 500), Color.Red)); // m1 hm
+            spikes.Add(new Spike(new Vector2(645, 480), new Vector2(650, 500), new Vector2(640, 500), Color.Red)); // m1 hr
+            spikes.Add(new Spike(new Vector2(795, 360), new Vector2(800, 380), new Vector2(790, 380), Color.Red)); // m2 vr1
+            spikes.Add(new Spike(new Vector2(785, 300), new Vector2(790, 320), new Vector2(780, 320), Color.Red)); // m2 vl1
+            spikes.Add(new Spike(new Vector2(795, 240), new Vector2(800, 260), new Vector2(790, 260), Color.Red)); // m2 vr2
+            spikes.Add(new Spike(new Vector2(495, 130), new Vector2(500, 150), new Vector2(490, 150), Color.Red)); // m3 hr
+            spikes.Add(new Spike(new Vector2(425, 130), new Vector2(430, 150), new Vector2(420, 150), Color.Red)); // m3 hl
+            spikes.Add(new Spike(new Vector2(260, 180), new Vector2(265, 200), new Vector2(255, 200), Color.Red)); // p3 t
+            spikes.Add(new Spike(new Vector2(225, 200), new Vector2(225, 210), new Vector2(205, 205), Color.Red)); // p3 l
+            spikes.Add(new Spike(new Vector2(265, 200), new Vector2(285, 205), new Vector2(265, 210), Color.Red)); // p3 r
+            spikes.Add(new Spike(new Vector2(285, 225), new Vector2(285, 235), new Vector2(265, 230), Color.Red)); // p4 l
+            spikes.Add(new Spike(new Vector2(165, 240), new Vector2(160, 260), new Vector2(170, 260), Color.Red)); // m4 l
+            spikes.Add(new Spike(new Vector2(10, 180), new Vector2(20, 220), new Vector2(0, 220), Color.Red)); // p5 l
+            spikes.Add(new Spike(new Vector2(30, 180), new Vector2(40, 220), new Vector2(20, 220), Color.Red)); // p5 r
+            spikes.Add(new Spike(new Vector2(5, 130), new Vector2(10, 150), new Vector2(0, 150), Color.Red)); // m5 l
+            spikes.Add(new Spike(new Vector2(115, 60), new Vector2(120, 80), new Vector2(110, 80), Color.Red)); // p6
         }
 
         void LevelTen(List<Platform> platforms, List<MovingPlatform> movingPlatforms)

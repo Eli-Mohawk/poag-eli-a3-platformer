@@ -178,6 +178,10 @@ namespace MohawkGame2D
                 RectangleF spikeHitbox = spike.GetHitbox();
                 if (CollisionDetection.CheckCollision(position, size, new Vector2(spikeHitbox.X, spikeHitbox.Y), new Vector2(spikeHitbox.Width, spikeHitbox.Height)))
                 {
+                    if (gameLevel == 0)
+                    {
+                        isPlayerDead = true;
+                    }
                     lives -= 1;
                     position = startPosition;
                     velocity = new Vector2(0, 0);
@@ -373,7 +377,8 @@ namespace MohawkGame2D
             }
             if (isFlyCheat)
             {
-                gravity = 0;
+                isPlayerGrounded = false;
+                gravity = 0.0f;
                 if (Input.IsKeyboardKeyDown(KeyboardInput.S))
                 {
                     velocity.Y = 10;
@@ -383,11 +388,11 @@ namespace MohawkGame2D
                     velocity.Y = 0;
                 }
 
-                if (Input.IsKeyboardKeyDown(KeyboardInput.Space))
+                if (Input.IsKeyboardKeyDown(KeyboardInput.W))
                 {
                     velocity.Y = -10;
                 }
-                else if (Input.IsKeyboardKeyReleased(KeyboardInput.Space))
+                else if (Input.IsKeyboardKeyReleased(KeyboardInput.W))
                 {
                     velocity.Y = 0;
                 }
@@ -431,6 +436,12 @@ namespace MohawkGame2D
                 {
                     gameLevel += 1;
                 }
+            }
+
+            if (Input.IsKeyboardKeyPressed(KeyboardInput.U))
+            {
+                gameLevel = 0;
+                position = new Vector2(750, 500);
             }
 
             if (Input.IsKeyboardKeyPressed(KeyboardInput.Y))

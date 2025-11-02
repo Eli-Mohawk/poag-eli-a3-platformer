@@ -140,7 +140,7 @@ namespace MohawkGame2D
             isUsingDetect = player.isDetect;
             if (isUsingDetect)
             {
-                DetectAbility(platforms, movingPlatforms);
+                DetectAbility(platforms, spikes, movingPlatforms);
             }
             #endregion
 
@@ -214,7 +214,7 @@ namespace MohawkGame2D
 
         }
 
-        void DetectAbility(List<Platform> platforms, List<MovingPlatform> movingPlatforms)
+        void DetectAbility(List<Platform> platforms, List<Spike> spikes, List<MovingPlatform> movingPlatforms)
         {
             Draw.LineSize = 1;
             Draw.LineColor = Color.Green;
@@ -252,6 +252,15 @@ namespace MohawkGame2D
                     if (platform.color == Color.Clear)
                     {
                         Draw.Rectangle(platform.position, platform.size);
+                    }
+                }
+
+                foreach (Spike spike in spikes)
+                {
+                    if (spike.color == Color.Clear)
+                    {
+                        Draw.LineColor = Color.Magenta;
+                        Draw.Triangle(spike.top, spike.right, spike.left);
                     }
                 }
             }
