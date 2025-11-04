@@ -151,11 +151,6 @@ namespace MohawkGame2D
             Text.Color = titleScreenColors[0];
             Text.Draw("-Ascent-", new Vector2(302.5f, 30));
 
-            // Cheat
-            Text.Color = Color.Green;
-            Text.Size = 15;
-            Text.Draw("(Cheat Addition)", new Vector2(320, 75));
-
             // headers
             Text.Color = titleScreenColors[2];
             Text.Size = 35;
