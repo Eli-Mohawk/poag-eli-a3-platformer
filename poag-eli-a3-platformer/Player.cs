@@ -12,8 +12,6 @@ namespace MohawkGame2D
 {
     public class Player
     {
-        bool isFlyCheat = false; // CHEAT
-
         public Vector2 startPosition = new Vector2(295, 525);
         public Vector2 position;
         Vector2 size = new Vector2(10, 20);
